@@ -113,7 +113,7 @@ export const Process = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="btn-premium text-lg px-8 py-6 border-white/20 text-white hover:bg-white/10 hover:text-white"
+              className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
             >
               Visit Experience Center
             </Button>
