@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          hover: "hsl(var(--primary-hover))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -47,6 +48,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Premium Color Palette
+        navy: {
+          deep: "hsl(var(--navy-deep))",
+          primary: "hsl(var(--navy-primary))",
+        },
+        platinum: "hsl(var(--platinum))",
+        silver: "hsl(var(--silver))",
+        charcoal: "hsl(var(--charcoal))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
