@@ -20,7 +20,7 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="text-2xl font-bold text-primary">
-              Arctic<span className="text-charcoal">Pro</span>
+              Arctic<span className="text-gunmetal">Pro</span>
             </div>
           </div>
 

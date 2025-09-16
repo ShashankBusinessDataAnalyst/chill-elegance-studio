@@ -2,67 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Premium Commercial Refrigeration Design System - Luxurious & Professional
+/* Premium Commercial Refrigeration Design System - Updated Brand Colors
 All colors MUST be HSL for proper theming.
 */
 
 @layer base {
   :root {
-    /* Base Colors - Crisp and Clean */
+    /* Base Colors - Brand Aligned */
     --background: 0 0% 100%;
-    --foreground: 215 28% 17%;
+    --foreground: 200 20% 17%;
 
     /* Card System - Premium Feel */
     --card: 0 0% 100%;
-    --card-foreground: 215 28% 17%;
+    --card-foreground: 200 20% 17%;
 
     /* Interactive Elements */
     --popover: 0 0% 100%;
-    --popover-foreground: 215 28% 17%;
+    --popover-foreground: 200 20% 17%;
 
-    /* Primary - Deep Navy for Trust & Sophistication */
-    --primary: 215 28% 17%;
-    --primary-foreground: 0 0% 98%;
-    --primary-hover: 215 35% 12%;
+    /* Primary - Glaucous Blue (Brand Color) */
+    --primary: 216 36% 52%;
+    --primary-foreground: 0 0% 99%;
+    --primary-hover: 216 40% 46%;
 
-    /* Secondary - Platinum & Silver Tones */
-    --secondary: 210 20% 96%;
-    --secondary-foreground: 215 28% 17%;
+    /* Secondary - French Gray */
+    --secondary: 215 18% 72%;
+    --secondary-foreground: 200 20% 17%;
 
-    /* Muted - Refined Grays */
-    --muted: 210 20% 96%;
-    --muted-foreground: 215 16% 47%;
+    /* Muted - Cadet Gray Tones */
+    --muted: 210 12% 66%;
+    --muted-foreground: 210 10% 46%;
 
-    /* Accent - Metallic Highlights */
-    --accent: 210 20% 94%;
-    --accent-foreground: 215 28% 17%;
+    /* Accent - Light French Gray */
+    --accent: 215 22% 76%;
+    --accent-foreground: 200 20% 17%;
 
     /* Status Colors */
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    /* Borders & Inputs - Subtle and Elegant */
-    --border: 215 20% 90%;
-    --input: 215 20% 90%;
-    --ring: 215 28% 17%;
+    /* Borders & Inputs - Subtle Brand Grays */
+    --border: 215 18% 85%;
+    --input: 215 18% 85%;
+    --ring: 216 36% 52%;
 
-    /* Premium Design Tokens */
-    --navy-deep: 215 35% 12%;
-    --navy-primary: 215 28% 17%;
-    --platinum: 210 20% 94%;
-    --silver: 210 16% 88%;
-    --charcoal: 215 25% 27%;
+    /* Brand Design Tokens */
+    --glaucous: 216 36% 52%;
+    --cadet-gray: 210 12% 66%;
+    --french-gray: 215 18% 72%;
+    --gunmetal: 200 20% 17%;
+    --brand-white: 0 0% 99%;
     
-    /* Gradients - Sophisticated Transitions */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--navy-deep)), hsl(var(--charcoal)));
-    --gradient-premium: linear-gradient(180deg, hsl(var(--background)), hsl(var(--platinum)));
-    --gradient-metallic: linear-gradient(90deg, hsl(var(--silver)), hsl(var(--platinum)));
+    /* Brand Gradients - Sophisticated Transitions */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--glaucous)), hsl(var(--gunmetal)));
+    --gradient-premium: linear-gradient(180deg, hsl(var(--background)), hsl(var(--french-gray)));
+    --gradient-brand: linear-gradient(90deg, hsl(var(--glaucous)), hsl(var(--cadet-gray)));
 
-    /* Shadows - Elegant Depth */
-    --shadow-soft: 0 2px 8px hsl(var(--navy-primary) / 0.04);
-    --shadow-medium: 0 4px 16px hsl(var(--navy-primary) / 0.08);
-    --shadow-large: 0 8px 32px hsl(var(--navy-primary) / 0.12);
-    --shadow-premium: 0 12px 40px hsl(var(--navy-primary) / 0.15);
+    /* Shadows - Brand Aligned */
+    --shadow-soft: 0 2px 8px hsl(var(--glaucous) / 0.08);
+    --shadow-medium: 0 4px 16px hsl(var(--glaucous) / 0.12);
+    --shadow-large: 0 8px 32px hsl(var(--glaucous) / 0.16);
+    --shadow-premium: 0 12px 40px hsl(var(--glaucous) / 0.20);
 
     --radius: 0.5rem;
 
@@ -84,46 +84,46 @@ All colors MUST be HSL for proper theming.
   }
 
   .dark {
-    /* Dark Mode - Premium & Sophisticated */
-    --background: 215 35% 8%;
-    --foreground: 210 20% 96%;
+    /* Dark Mode - Brand Colors Adapted */
+    --background: 200 20% 12%;
+    --foreground: 215 18% 85%;
 
-    --card: 215 30% 12%;
-    --card-foreground: 210 20% 96%;
+    --card: 200 25% 15%;
+    --card-foreground: 215 18% 85%;
 
-    --popover: 215 30% 12%;
-    --popover-foreground: 210 20% 96%;
+    --popover: 200 25% 15%;
+    --popover-foreground: 215 18% 85%;
 
-    --primary: 210 20% 96%;
-    --primary-foreground: 215 35% 12%;
-    --primary-hover: 210 25% 92%;
+    --primary: 216 36% 62%;
+    --primary-foreground: 200 20% 12%;
+    --primary-hover: 216 40% 68%;
 
-    --secondary: 215 25% 18%;
-    --secondary-foreground: 210 20% 96%;
+    --secondary: 210 15% 25%;
+    --secondary-foreground: 215 18% 85%;
 
-    --muted: 215 25% 18%;
-    --muted-foreground: 215 15% 65%;
+    --muted: 210 15% 25%;
+    --muted-foreground: 210 12% 60%;
 
-    --accent: 215 25% 22%;
-    --accent-foreground: 210 20% 96%;
+    --accent: 210 18% 30%;
+    --accent-foreground: 215 18% 85%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 215 25% 22%;
-    --input: 215 25% 22%;
-    --ring: 210 20% 96%;
+    --border: 210 18% 25%;
+    --input: 210 18% 25%;
+    --ring: 216 36% 62%;
     
-    /* Dark Mode Premium Tokens */
-    --navy-deep: 215 40% 6%;
-    --navy-primary: 215 35% 12%;
-    --platinum: 215 20% 20%;
-    --silver: 215 15% 25%;
-    --charcoal: 215 25% 15%;
+    /* Dark Mode Brand Tokens */
+    --glaucous: 216 36% 62%;
+    --cadet-gray: 210 12% 50%;
+    --french-gray: 215 15% 40%;
+    --gunmetal: 200 20% 12%;
+    --brand-white: 215 18% 90%;
     
-    --gradient-hero: linear-gradient(135deg, hsl(var(--navy-deep)), hsl(var(--charcoal)));
-    --gradient-premium: linear-gradient(180deg, hsl(var(--background)), hsl(var(--platinum)));
-    --shadow-premium: 0 12px 40px hsl(0 0% 0% / 0.3);
+    --gradient-hero: linear-gradient(135deg, hsl(var(--glaucous)), hsl(var(--gunmetal)));
+    --gradient-premium: linear-gradient(180deg, hsl(var(--background)), hsl(var(--french-gray)));
+    --shadow-premium: 0 12px 40px hsl(0 0% 0% / 0.4);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

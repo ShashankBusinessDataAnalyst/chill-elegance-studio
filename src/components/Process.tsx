@@ -97,8 +97,8 @@ export const Process = () => {
           })}
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center bg-gradient-to-r from-primary to-charcoal rounded-2xl p-12 text-white">
+        {/* Bottom CTA Section */}
+        <div className="text-center bg-gradient-to-r from-glaucous to-gunmetal rounded-2xl p-12 text-white">
           <h3 className="text-3xl font-bold mb-4">Ready to Start Your Project?</h3>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
             Book your consultation today and discover how our premium refrigeration solutions 

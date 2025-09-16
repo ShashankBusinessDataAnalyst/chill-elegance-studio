@@ -48,14 +48,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Premium Color Palette
-        navy: {
-          deep: "hsl(var(--navy-deep))",
-          primary: "hsl(var(--navy-primary))",
-        },
-        platinum: "hsl(var(--platinum))",
-        silver: "hsl(var(--silver))",
-        charcoal: "hsl(var(--charcoal))",
+        // Brand Color Palette (Following Brand Guidelines)
+        glaucous: "hsl(var(--glaucous))",
+        "cadet-gray": "hsl(var(--cadet-gray))",
+        "french-gray": "hsl(var(--french-gray))",
+        gunmetal: "hsl(var(--gunmetal))",
+        "brand-white": "hsl(var(--brand-white))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

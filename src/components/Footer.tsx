@@ -23,14 +23,14 @@ export const Footer = () => {
   ];
 
   return (
-    <footer className="bg-navy-primary text-white">
+  <footer className="bg-gunmetal text-white">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Main Footer Content */}
         <div className="py-16 grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="lg:col-span-1">
             <div className="text-2xl font-bold mb-6">
-              Arctic<span className="text-platinum">Pro</span>
+              Arctic<span className="text-french-gray">Pro</span>
             </div>
             <p className="text-white/80 mb-6 leading-relaxed">
               Premium commercial refrigeration solutions for the world's finest restaurants, 

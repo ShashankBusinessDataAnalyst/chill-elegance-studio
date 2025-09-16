@@ -103,7 +103,7 @@ export const Contact = () => {
             })}
 
             {/* Emergency Service Banner */}
-            <div className="bg-gradient-to-r from-primary to-charcoal rounded-2xl p-8 text-white">
+            <div className="bg-gradient-to-r from-glaucous to-gunmetal rounded-2xl p-8 text-white">
               <h4 className="text-xl font-bold mb-3">24/7 Emergency Service</h4>
               <p className="mb-4 text-white/90">
                 Equipment breakdown? Our emergency technicians are standing by to restore your operations quickly.
