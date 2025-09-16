@@ -51,7 +51,7 @@ export const Hero = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                className="btn-premium text-lg px-8 py-6 border-white/20 text-white hover:bg-black/10 hover:text-white"
+                className="btn-premium text-lg px-8 py-6 border-white/20 text-white hover:opacity-80"
               >
                 Request Consultation
               </Button>
