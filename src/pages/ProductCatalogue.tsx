@@ -32,7 +32,7 @@ const ProductCatalogue = () => {
       
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="py-8 bg-gradient-to-b from-primary/5 to-background">
+        <section className="py-6 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <Link to="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6">
