@@ -1,41 +1,33 @@
 import { Users, Building, Box, Calculator, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-
 export const Process = () => {
-  const steps = [
-    {
-      step: '01',
-      icon: Users,
-      title: 'Meet Sales Consultant',
-      description: 'Connect with our refrigeration experts who understand your specific industry needs and operational requirements.',
-      features: ['Industry expertise', 'Personalized consultation', 'Needs assessment'],
-    },
-    {
-      step: '02',
-      icon: Building,
-      title: 'Experience Center Walkthrough',
-      description: 'Visit our state-of-the-art showroom to see, touch, and test our premium refrigeration solutions firsthand.',
-      features: ['Live demonstrations', 'Product comparisons', 'Performance testing'],
-    },
-    {
-      step: '03',
-      icon: Box,
-      title: 'Free 3D Layout Design',
-      description: 'Our experts create a detailed 3D layout of your space, optimizing equipment placement for maximum efficiency.',
-      features: ['Professional CAD design', 'Space optimization', 'Equipment integration'],
-    },
-    {
-      step: '04',
-      icon: Calculator,
-      title: 'Instant Quote',
-      description: 'Receive a comprehensive, transparent quote including equipment, installation, and ongoing support services.',
-      features: ['Detailed pricing', 'Financing options', 'Service packages'],
-    },
-  ];
-
-  return (
-    <section className="py-24 bg-gradient-to-b from-background via-secondary/10 to-background">
+  const steps = [{
+    step: '01',
+    icon: Users,
+    title: 'Meet Sales Consultant',
+    description: 'Connect with our refrigeration experts who understand your specific industry needs and operational requirements.',
+    features: ['Industry expertise', 'Personalized consultation', 'Needs assessment']
+  }, {
+    step: '02',
+    icon: Building,
+    title: 'Experience Center Walkthrough',
+    description: 'Visit our state-of-the-art showroom to see, touch, and test our premium refrigeration solutions firsthand.',
+    features: ['Live demonstrations', 'Product comparisons', 'Performance testing']
+  }, {
+    step: '03',
+    icon: Box,
+    title: 'Free 3D Layout Design',
+    description: 'Our experts create a detailed 3D layout of your space, optimizing equipment placement for maximum efficiency.',
+    features: ['Professional CAD design', 'Space optimization', 'Equipment integration']
+  }, {
+    step: '04',
+    icon: Calculator,
+    title: 'Instant Quote',
+    description: 'Receive a comprehensive, transparent quote including equipment, installation, and ongoing support services.',
+    features: ['Detailed pricing', 'Financing options', 'Service packages']
+  }];
+  return <section className="py-24 bg-gradient-to-b from-background via-secondary/10 to-background">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -51,15 +43,11 @@ export const Process = () => {
         {/* Process Steps */}
         <div className="grid lg:grid-cols-4 gap-8 mb-16">
           {steps.map((step, index) => {
-            const IconComponent = step.icon;
-            const isLast = index === steps.length - 1;
-            
-            return (
-              <div key={index} className="relative">
+          const IconComponent = step.icon;
+          const isLast = index === steps.length - 1;
+          return <div key={index} className="relative">
                 {/* Connection Line */}
-                {!isLast && (
-                  <div className="hidden lg:block absolute top-20 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-primary/10 transform translate-x-4 z-0"></div>
-                )}
+                {!isLast && <div className="hidden lg:block absolute top-20 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-primary/10 transform translate-x-4 z-0"></div>}
                 
                 {/* Step Card */}
                 <div className="relative z-10 card-premium p-8 text-center group">
@@ -85,17 +73,14 @@ export const Process = () => {
 
                   {/* Features */}
                   <ul className="space-y-2">
-                    {step.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center justify-center gap-2 text-sm">
+                    {step.features.map((feature, featureIndex) => <li key={featureIndex} className="flex items-center justify-center gap-2 text-sm">
                         <div className="w-1.5 h-1.5 bg-primary rounded-full flex-shrink-0"></div>
                         <span>{feature}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </div>
-              </div>
-            );
-          })}
+              </div>;
+        })}
         </div>
 
         {/* Bottom CTA Section */}
@@ -106,17 +91,10 @@ export const Process = () => {
             can transform your commercial kitchen operations.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="btn-premium text-lg px-8 py-6">
-              Book Consultation
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center rounded-none bg-[#000a0e]/0">
+            
             <Link to="/experience-center">
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-              >
+              <Button size="lg" variant="outline" className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white">
                 Visit Experience Center
               </Button>
             </Link>
@@ -143,6 +121,5 @@ export const Process = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
