@@ -1,9 +1,73 @@
+import { useState } from 'react';
 import { ArrowRight, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 export const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    project_details: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!formData.name || !formData.email) {
+      toast({
+        title: "Required fields missing",
+        description: "Please fill in your name and email address.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase
+        .from('consultations')
+        .insert([formData]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Consultation request submitted!",
+        description: "We'll get back to you within 24 hours."
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        project_details: ''
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Submission failed",
+        description: "Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const contactInfo = [
     {
       icon: Mail,
@@ -49,36 +113,68 @@ export const Contact = () => {
           {/* Contact Form */}
           <div className="card-premium p-8">
             <h3 className="text-2xl font-bold mb-6">Request a Consultation</h3>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Name *</label>
-                  <Input placeholder="Your full name" />
+                  <Input 
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    placeholder="Your full name"
+                    required
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Company</label>
-                  <Input placeholder="Restaurant/Business name" />
+                  <Input 
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    placeholder="Restaurant/Business name"
+                  />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Email *</label>
-                  <Input type="email" placeholder="your@email.com" />
+                  <Input 
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    placeholder="your@email.com"
+                    required
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Phone</label>
-                  <Input type="tel" placeholder="+1 (555) 123-4567" />
+                  <Input 
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="+1 (555) 123-4567"
+                  />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Project Details</label>
                 <Textarea 
+                  name="project_details"
+                  value={formData.project_details}
+                  onChange={handleInputChange}
                   placeholder="Tell us about your refrigeration needs, kitchen size, and any specific requirements..."
                   rows={4}
                 />
               </div>
-              <Button size="lg" className="w-full btn-premium text-lg py-6">
-                Send Message
+              <Button 
+                type="submit"
+                size="lg" 
+                className="w-full btn-premium text-lg py-6"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </form>
