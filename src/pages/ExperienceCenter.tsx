@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, Clock, ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,6 +27,15 @@ const ExperienceCenter = () => {
     preferred_time: '',
     message: ''
   });
+
+  // Auto-slideshow with 1.5 second interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % 5); // 5 slides total
+    }, 1500);
+
+    return () => clearInterval(interval);
+  }, []);
 
   // Slideshow images featuring hotels and chefs using our refrigeration products
   const slides = [
