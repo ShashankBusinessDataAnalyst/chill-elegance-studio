@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { X, Headphones, Send } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 const ChatAssistant = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -13,13 +14,31 @@ const ChatAssistant = () => {
   const [inputText, setInputText] = useState("");
 
 
-  const hasContactNumber = (text: string) => {
-    // Check for phone number patterns (various formats)
-    const phoneRegex = /(\+?\d{1,4}[\s\-\.]?)?(\(?\d{3}\)?[\s\-\.]?)?\d{3}[\s\-\.]?\d{4}/;
-    return phoneRegex.test(text);
+  const hasValid10DigitNumber = (text: string) => {
+    // Remove all non-digit characters and check if exactly 10 digits remain
+    const digitsOnly = text.replace(/\D/g, '');
+    return digitsOnly.length === 10;
   };
 
-  const handleSendMessage = () => {
+  const extractPhoneNumber = (text: string) => {
+    // Extract only digits from the text
+    return text.replace(/\D/g, '');
+  };
+
+  const savePhoneNumber = async (phoneNumber: string, userMessage: string) => {
+    try {
+      await supabase
+        .from('chat_interactions')
+        .insert({
+          phone_number: phoneNumber,
+          user_message: userMessage
+        });
+    } catch (error) {
+      console.error('Error saving phone number:', error);
+    }
+  };
+
+  const handleSendMessage = async () => {
     if (inputText.trim()) {
       const newMessage = {
         id: messages.length + 1,
@@ -29,12 +48,14 @@ const ChatAssistant = () => {
       setMessages([...messages, newMessage]);
       
       // Simulate agent response
-      setTimeout(() => {
+      setTimeout(async () => {
         let responseText;
-        if (hasContactNumber(inputText)) {
+        if (hasValid10DigitNumber(inputText)) {
+          const phoneNumber = extractPhoneNumber(inputText);
+          await savePhoneNumber(phoneNumber, inputText);
           responseText = "Thank you! We've received your contact number. Our sales team will reach out to you shortly to assist with your refrigeration needs.";
         } else {
-          responseText = "Thank you for your message! I'm here to help with any questions about our commercial refrigeration solutions.\nPlease share your contact number, and our sales team will get in touch with you shortly.";
+          responseText = "Please enter a valid 10-digit phone number so we can assist you with your commercial refrigeration needs.";
         }
         
         const response = {

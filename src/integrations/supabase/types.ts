@@ -53,6 +53,27 @@ export type Database = {
         }
         Relationships: []
       }
+      chat_interactions: {
+        Row: {
+          created_at: string
+          id: string
+          phone_number: string
+          user_message: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          phone_number: string
+          user_message: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          phone_number?: string
+          user_message?: string
+        }
+        Relationships: []
+      }
       consultations: {
         Row: {
           company: string | null
