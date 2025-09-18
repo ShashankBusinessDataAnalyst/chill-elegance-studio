@@ -8,6 +8,11 @@ import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import hotelKitchen1 from '@/assets/hotel-kitchen-1.jpg';
+import restaurantChef2 from '@/assets/restaurant-chef-2.jpg';
+import pastryKitchen3 from '@/assets/pastry-kitchen-3.jpg';
+import banquetKitchen4 from '@/assets/banquet-kitchen-4.jpg';
+import resortKitchen5 from '@/assets/resort-kitchen-5.jpg';
 
 const ExperienceCenter = () => {
   const { toast } = useToast();
@@ -23,22 +28,32 @@ const ExperienceCenter = () => {
     message: ''
   });
 
-  // Slideshow images - using placeholder images for demo
+  // Slideshow images featuring hotels and chefs using our refrigeration products
   const slides = [
     {
-      image: '/src/assets/commercial-kitchen.jpg',
-      title: 'State-of-the-Art Kitchen Solutions',
-      description: 'Experience our complete range of commercial refrigeration systems in action'
+      image: hotelKitchen1,
+      title: 'Premium Hotel Kitchen Solutions',
+      description: 'Professional chefs in luxury hotels rely on our commercial refrigeration systems for optimal food safety and efficiency'
     },
     {
-      image: '/src/assets/blast-chiller.jpg',
-      title: 'Advanced Blast Chilling Technology',
-      description: 'See how our blast chillers maintain perfect food safety and quality'
+      image: restaurantChef2,
+      title: 'Fine Dining Excellence',
+      description: 'Executive chefs trust our display refrigerators to showcase premium ingredients while maintaining perfect temperatures'
     },
     {
-      image: '/src/assets/display-refrigerator.jpg',
-      title: 'Premium Display Refrigeration',
-      description: 'Discover our elegant display cases that showcase your products beautifully'
+      image: pastryKitchen3,
+      title: 'Specialized Pastry Operations',
+      description: 'Modern pastry kitchens depend on our blast chillers and specialized refrigeration for delicate dessert preparation'
+    },
+    {
+      image: banquetKitchen4,
+      title: 'Large-Scale Event Catering',
+      description: 'Hotel banquet operations require our extensive refrigeration systems to handle high-volume food preparation safely'
+    },
+    {
+      image: resortKitchen5,
+      title: 'Five-Star Resort Kitchens',
+      description: 'Luxury resorts choose our premium refrigeration solutions to maintain the highest culinary standards for their guests'
     }
   ];
 
