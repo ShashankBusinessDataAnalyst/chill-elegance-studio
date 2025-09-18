@@ -157,9 +157,9 @@ const ExperienceCenter = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-24 pb-8 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-12 pb-8 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-6">
             <h1 className="heading-premium text-4xl lg:text-6xl mb-6">
               Visit Our Experience Center
             </h1>
