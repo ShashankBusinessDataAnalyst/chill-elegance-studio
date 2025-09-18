@@ -93,7 +93,15 @@ export const Process = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center rounded-none bg-[#000a0e]/0">
             
-            <Link to="/experience-center">
+            <Link 
+              to="/experience-center"
+              onClick={() => {
+                // Small delay to allow navigation to complete
+                setTimeout(() => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+              }}
+            >
               <Button size="lg" variant="outline" className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white">
                 Visit Experience Center
               </Button>
