@@ -92,7 +92,14 @@ export const Products = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <Link to="/product-catalogue">
+          <Link 
+            to="/product-catalogue"
+            onClick={() => {
+              setTimeout(() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }, 100);
+            }}
+          >
             <Button size="lg" className="btn-premium text-lg px-8 py-6">
               View Complete Catalog
               <ArrowRight className="ml-2 h-5 w-5" />
