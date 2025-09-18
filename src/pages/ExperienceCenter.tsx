@@ -175,7 +175,7 @@ const ExperienceCenter = () => {
       <section className="py-16">
         <div className="container mx-auto px-6 lg:px-8">
           <div className="relative max-w-4xl mx-auto">
-            <div className="relative h-96 md:h-[500px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
+            <div className="relative h-[400px] md:h-[600px] lg:h-[700px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
               <img
                 src={slides[currentSlide].image}
                 alt={slides[currentSlide].title}
