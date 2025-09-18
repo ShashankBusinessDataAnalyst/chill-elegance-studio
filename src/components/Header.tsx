@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import williamsLogo from '@/assets/williams-logo.png';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -27,8 +28,12 @@ export const Header = () => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="text-2xl font-bold text-primary hover:text-primary/80 transition-colors duration-200">
-              Arctic<span className="text-gunmetal">Pro</span>
+            <Link to="/" className="block hover:opacity-80 transition-opacity duration-200">
+              <img 
+                src={williamsLogo} 
+                alt="Williams Refrigeration" 
+                className="h-12 w-auto"
+              />
             </Link>
           </div>
 
