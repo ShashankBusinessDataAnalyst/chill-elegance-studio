@@ -93,9 +93,7 @@ const ProductCatalogue = () => {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-6">
-                Download Full Catalog (PDF)
-              </Button>
+              
             </div>
           </div>
         </section>
