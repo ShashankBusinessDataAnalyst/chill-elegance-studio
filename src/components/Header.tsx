@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ConsultationModal } from '@/components/ConsultationModal';
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
 
   const navigation = [
     { name: 'Products', href: '#products' },
@@ -39,7 +41,11 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <Button variant="default" className="btn-premium">
+            <Button 
+              variant="default" 
+              className="btn-premium"
+              onClick={() => setIsConsultationModalOpen(true)}
+            >
               Get Quote
             </Button>
           </div>
@@ -70,13 +76,22 @@ export const Header = () => {
                   {item.name}
                 </a>
               ))}
-              <Button variant="default" className="w-full mt-4 btn-premium">
+              <Button 
+                variant="default" 
+                className="w-full mt-4 btn-premium"
+                onClick={() => setIsConsultationModalOpen(true)}
+              >
                 Get Quote
               </Button>
             </div>
           </div>
         )}
       </nav>
+      
+      <ConsultationModal 
+        isOpen={isConsultationModalOpen}
+        onClose={() => setIsConsultationModalOpen(false)}
+      />
     </header>
   );
 };
