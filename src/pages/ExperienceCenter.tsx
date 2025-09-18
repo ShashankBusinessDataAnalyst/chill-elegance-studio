@@ -173,7 +173,7 @@ const ExperienceCenter = () => {
 
       {/* Experience Center Content - 2 Column Layout */}
       {/* Experience Center Content - 70/30 Column Layout */}
-      <section className="pt-6 pb-12">
+      <section className="py-12">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-[70%_30%] gap-12">
             
