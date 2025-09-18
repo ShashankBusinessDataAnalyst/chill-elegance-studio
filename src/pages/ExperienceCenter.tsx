@@ -157,7 +157,7 @@ const ExperienceCenter = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="pt-28 pb-4 bg-gradient-to-b from-primary/5 to-background">
+      <section className="pt-26 pb-8 bg-gradient-to-b from-primary/5 to-background">
         <div className="container mx-auto px-6 lg:px-6">
           <div className="text-center mb-6">
             <h1 className="heading-premium text-4xl lg:text-6xl mb-6">
@@ -173,13 +173,13 @@ const ExperienceCenter = () => {
 
       {/* Experience Center Content - 2 Column Layout */}
       {/* Experience Center Content - 70/30 Column Layout */}
-      <section className="py-16">
-        <div className="container mx-auto px-2 lg:px-8">
+      <section className="py-12">
+        <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-[70%_30%] gap-12">
             
             {/* Left Column - Image Slideshow */}
             <div className="relative">
-              <div className="relative h-[550px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
+              <div className="relative h-[600px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
                 <img
                   src={slides[currentSlide].image}
                   alt={slides[currentSlide].title}
