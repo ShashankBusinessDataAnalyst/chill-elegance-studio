@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import ExperienceCenter from "./pages/ExperienceCenter";
 import ProductCatalogue from "./pages/ProductCatalogue";
 import NotFound from "./pages/NotFound";
+import ChatAssistant from "@/components/ChatAssistant";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <ChatAssistant />
     </TooltipProvider>
   </QueryClientProvider>
 );
