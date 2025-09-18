@@ -13,6 +13,12 @@ const ChatAssistant = () => {
   const [inputText, setInputText] = useState("");
 
 
+  const hasContactNumber = (text: string) => {
+    // Check for phone number patterns (various formats)
+    const phoneRegex = /(\+?\d{1,4}[\s\-\.]?)?(\(?\d{3}\)?[\s\-\.]?)?\d{3}[\s\-\.]?\d{4}/;
+    return phoneRegex.test(text);
+  };
+
   const handleSendMessage = () => {
     if (inputText.trim()) {
       const newMessage = {
@@ -21,17 +27,25 @@ const ChatAssistant = () => {
         sender: "user"
       };
       setMessages([...messages, newMessage]);
-      setInputText("");
       
       // Simulate agent response
       setTimeout(() => {
+        let responseText;
+        if (hasContactNumber(inputText)) {
+          responseText = "Thank you! We've received your contact number. Our sales team will reach out to you shortly to assist with your refrigeration needs.";
+        } else {
+          responseText = "Thank you for your message! I'm here to help with any questions about our commercial refrigeration solutions.\nPlease share your contact number, and our sales team will get in touch with you shortly.";
+        }
+        
         const response = {
           id: messages.length + 2,
-          text: "Thank you for your message! I'm here to help with any questions about our commercial refrigeration solutions.",
+          text: responseText,
           sender: "agent"
         };
         setMessages(prev => [...prev, response]);
       }, 1000);
+      
+      setInputText("");
     }
   };
 
