@@ -5,6 +5,13 @@ import { Button } from '@/components/ui/button';
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const navigation = [
     { name: 'Products', href: '#products' },
     { name: 'Solutions', href: '#solutions' },
@@ -39,7 +46,7 @@ export const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
-            <Button variant="default" className="btn-premium">
+            <Button variant="default" className="btn-premium" onClick={scrollToContact}>
               Get Quote
             </Button>
           </div>
@@ -70,7 +77,7 @@ export const Header = () => {
                   {item.name}
                 </a>
               ))}
-              <Button variant="default" className="w-full mt-4 btn-premium">
+              <Button variant="default" className="w-full mt-4 btn-premium" onClick={scrollToContact}>
                 Get Quote
               </Button>
             </div>
