@@ -6,28 +6,21 @@ import { Link } from 'react-router-dom';
 import displayRefrigerator from '@/assets/display-refrigerator.jpg';
 import blastChiller from '@/assets/blast-chiller.jpg';
 import commercialKitchen from '@/assets/commercial-kitchen.jpg';
-
 const ProductCatalogue = () => {
-  const categories = [
-    {
-      title: 'Display Cabinets',
-      image: displayRefrigerator,
-      description: 'Premium glass-door display cases and showcases'
-    },
-    {
-      title: 'Commercial Refrigeration',
-      image: blastChiller,
-      description: 'Walk-in coolers, freezers, and storage solutions'
-    },
-    {
-      title: 'Professional Kitchen Equipment',
-      image: commercialKitchen,
-      description: 'Complete kitchen setups and specialized equipment'
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const categories = [{
+    title: 'Display Cabinets',
+    image: displayRefrigerator,
+    description: 'Premium glass-door display cases and showcases'
+  }, {
+    title: 'Commercial Refrigeration',
+    image: blastChiller,
+    description: 'Walk-in coolers, freezers, and storage solutions'
+  }, {
+    title: 'Professional Kitchen Equipment',
+    image: commercialKitchen,
+    description: 'Complete kitchen setups and specialized equipment'
+  }];
+  return <div className="min-h-screen bg-background">
       <Header />
       
       <main className="pt-20">
@@ -35,10 +28,7 @@ const ProductCatalogue = () => {
         <section className="py-6 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <Link to="/" className="inline-flex items-center gap-2 text-primary hover:text-primary/80 mb-6">
-                <ArrowLeft className="h-4 w-4" />
-                Back to Home
-              </Link>
+              
               
               <h1 className="heading-premium text-4xl lg:text-6xl mb-6">
                 Products
@@ -57,18 +47,10 @@ const ProductCatalogue = () => {
         <section className="py-20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-              {categories.map((category, index) => (
-                <div 
-                  key={index} 
-                  className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]"
-                >
+              {categories.map((category, index) => <div key={index} className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
                   {/* Product Image Container */}
                   <div className="bg-secondary/20 rounded-2xl p-8 mb-6 aspect-square flex items-center justify-center overflow-hidden">
-                    <img
-                      src={category.image}
-                      alt={category.title}
-                      className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110"
-                    />
+                    <img src={category.image} alt={category.title} className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110" />
                   </div>
 
                   {/* Category Info */}
@@ -86,8 +68,7 @@ const ProductCatalogue = () => {
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
                     </button>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </section>
@@ -101,15 +82,13 @@ const ProductCatalogue = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/">
-                <Button 
-                  size="lg" 
-                  className="btn-premium text-lg px-8 py-6"
-                  onClick={() => {
-                    setTimeout(() => {
-                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                    }, 100);
-                  }}
-                >
+                <Button size="lg" className="btn-premium text-lg px-8 py-6" onClick={() => {
+                setTimeout(() => {
+                  document.getElementById('contact')?.scrollIntoView({
+                    behavior: 'smooth'
+                  });
+                }, 100);
+              }}>
                   Request Custom Quote
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
@@ -123,8 +102,6 @@ const ProductCatalogue = () => {
       </main>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default ProductCatalogue;
