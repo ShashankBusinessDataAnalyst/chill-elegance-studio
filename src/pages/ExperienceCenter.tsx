@@ -173,122 +173,122 @@ const ExperienceCenter = () => {
 
       {/* Experience Center Content - 2 Column Layout */}
       {/* Experience Center Content - 70/30 Column Layout */}
-<section className="py-16">
-  <div className="container mx-auto px-4 lg:px-8">
-    <div className="grid lg:grid-cols-[70%_30%] gap-12">
+      <section className="py-16">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-[70%_30%] gap-12">
+            
+            {/* Left Column - Image Slideshow */}
+            <div className="relative">
+              <div className="relative h-[400px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
+                <img
+                  src={slides[currentSlide].image}
+                  alt={slides[currentSlide].title}
+                  className="w-full h-full object-cover"
+                  onError={(e) => {
+                    // Fallback to gradient background if image fails to load
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
       
-      {/* Left Column - Image Slideshow */}
-      <div className="relative">
-        <div className="relative h-[400px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
-          <img
-            src={slides[currentSlide].image}
-            alt={slides[currentSlide].title}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              // Fallback to gradient background if image fails to load
-              e.currentTarget.style.display = 'none';
-            }}
-          />
-
-          {/* Slide Content Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-            <div className="p-6 text-white">
-              <h3 className="text-xl md:text-2xl font-bold mb-2">
-                {slides[currentSlide].title}
-              </h3>
-              <p className="text-sm md:text-base text-white/90">
-                {slides[currentSlide].description}
-              </p>
-            </div>
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
-          >
-            <ChevronLeft className="h-5 w-5 text-white" />
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
-          >
-            <ChevronRight className="h-5 w-5 text-white" />
-          </button>
-        </div>
-
-        {/* Slide Indicators */}
-        <div className="flex justify-center mt-4 space-x-2">
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                index === currentSlide
-                  ? 'bg-primary scale-125'
-                  : 'bg-primary/30 hover:bg-primary/50'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Right Column - Experience Center Information */}
-      <div className="space-y-8">
-        <div className="card-premium p-8">
-          <h2 className="text-2xl font-bold mb-4">Experience Our Solutions</h2>
-          <p className="text-muted-foreground mb-6">
-            Visit our state-of-the-art experience center to see our complete range of commercial refrigeration solutions in action. Our expert team will guide you through personalized demonstrations tailored to your specific needs.
-          </p>
-
-          <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <h4 className="font-semibold">Live Product Demonstrations</h4>
-                <p className="text-sm text-muted-foreground">
-                  See our refrigeration systems operating under real-world conditions
-                </p>
+                {/* Slide Content Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                  <div className="p-6 text-white">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2">
+                      {slides[currentSlide].title}
+                    </h3>
+                    <p className="text-sm md:text-base text-white/90">
+                      {slides[currentSlide].description}
+                    </p>
+                  </div>
+                </div>
+      
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+                >
+                  <ChevronLeft className="h-5 w-5 text-white" />
+                </button>
+      
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+                >
+                  <ChevronRight className="h-5 w-5 text-white" />
+                </button>
+              </div>
+      
+              {/* Slide Indicators */}
+              <div className="flex justify-center mt-4 space-x-2">
+                {slides.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => goToSlide(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                      index === currentSlide
+                        ? 'bg-primary scale-125'
+                        : 'bg-primary/30 hover:bg-primary/50'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
-
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <h4 className="font-semibold">Expert Consultation</h4>
-                <p className="text-sm text-muted-foreground">
-                  Get personalized advice from our refrigeration specialists
+      
+            {/* Right Column - Experience Center Information */}
+            <div className="space-y-8">
+              <div className="card-premium p-8">
+                <h2 className="text-2xl font-bold mb-4">Experience Our Solutions</h2>
+                <p className="text-muted-foreground mb-6">
+                  Visit our state-of-the-art experience center to see our complete range of commercial refrigeration solutions in action. Our expert team will guide you through personalized demonstrations tailored to your specific needs.
                 </p>
+      
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold">Live Product Demonstrations</h4>
+                      <p className="text-sm text-muted-foreground">
+                        See our refrigeration systems operating under real-world conditions
+                      </p>
+                    </div>
+                  </div>
+      
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold">Expert Consultation</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Get personalized advice from our refrigeration specialists
+                      </p>
+                    </div>
+                  </div>
+      
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold">Custom Solutions Design</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Design the perfect refrigeration system for your business
+                      </p>
+                    </div>
+                  </div>
+      
+                  <div className="flex items-start gap-3">
+                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <div>
+                      <h4 className="font-semibold">Hands-on Training</h4>
+                      <p className="text-sm text-muted-foreground">
+                        Learn proper operation and maintenance techniques
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <h4 className="font-semibold">Custom Solutions Design</h4>
-                <p className="text-sm text-muted-foreground">
-                  Design the perfect refrigeration system for your business
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-3">
-              <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-              <div>
-                <h4 className="font-semibold">Hands-on Training</h4>
-                <p className="text-sm text-muted-foreground">
-                  Learn proper operation and maintenance techniques
-                </p>
-              </div>
-            </div>
+      
           </div>
         </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+      </section>
 
 
 
