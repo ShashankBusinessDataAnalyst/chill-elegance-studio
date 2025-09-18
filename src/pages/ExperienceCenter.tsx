@@ -174,7 +174,7 @@ const ExperienceCenter = () => {
       {/* Experience Center Content - 2 Column Layout */}
       <section className="py-16">
         <div className="container mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid-cols-[70%_30%] gap-12">
             {/* Left Column - Image Slideshow */}
             <div className="relative">
               <div className="relative h-[400px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
