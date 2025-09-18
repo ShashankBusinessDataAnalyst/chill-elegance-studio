@@ -16,10 +16,10 @@ export const Header = () => {
 
   const navigation = [
     { name: 'Home', href: '/' },
-    { name: 'Product', href: '#products' },
-    { name: 'Markets', href: '#markets' },
+    { name: 'Product', href: '/#products' },
+    { name: 'Markets', href: '/#markets' },
     { name: 'Experience Center', href: '/experience-center' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Contact', href: '/#contact' },
   ];
 
   return (
