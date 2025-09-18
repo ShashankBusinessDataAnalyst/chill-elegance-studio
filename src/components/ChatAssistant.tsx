@@ -12,6 +12,8 @@ const ChatAssistant = () => {
     { id: 1, text: "Hello user! How can I help you today?", sender: "agent" }
   ]);
   const [inputText, setInputText] = useState("");
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [dbRecordId, setDbRecordId] = useState<string | null>(null);
 
 
   const hasValid10DigitNumber = (text: string) => {
@@ -25,16 +27,37 @@ const ChatAssistant = () => {
     return text.replace(/\D/g, '');
   };
 
-  const saveUserMessage = async (userMessage: string, phoneNumber: string | null = null) => {
+  const createOrUpdateSession = async (updatedMessages: any[], phoneNumber: string | null = null) => {
     try {
-      await supabase
-        .from('chat_interactions')
-        .insert({
-          phone_number: phoneNumber || '',
-          user_message: userMessage
-        });
+      if (!sessionId) {
+        // Create new session
+        const newSessionId = crypto.randomUUID();
+        const { data, error } = await supabase
+          .from('chat_sessions')
+          .insert({
+            session_id: newSessionId,
+            conversation: updatedMessages,
+            phone_number: phoneNumber
+          })
+          .select()
+          .single();
+        
+        if (error) throw error;
+        
+        setSessionId(newSessionId);
+        setDbRecordId(data.id);
+      } else {
+        // Update existing session
+        await supabase
+          .from('chat_sessions')
+          .update({
+            conversation: updatedMessages,
+            phone_number: phoneNumber || undefined
+          })
+          .eq('id', dbRecordId);
+      }
     } catch (error) {
-      console.error('Error saving user message:', error);
+      console.error('Error managing chat session:', error);
     }
   };
 
@@ -45,26 +68,31 @@ const ChatAssistant = () => {
         text: inputText,
         sender: "user"
       };
-      setMessages([...messages, newMessage]);
+      const updatedMessages = [...messages, newMessage];
+      setMessages(updatedMessages);
       
       // Simulate agent response
       setTimeout(async () => {
         let responseText;
+        let phoneNumber = null;
+        
         if (hasValid10DigitNumber(inputText)) {
-          const phoneNumber = extractPhoneNumber(inputText);
-          await saveUserMessage(inputText, phoneNumber);
+          phoneNumber = extractPhoneNumber(inputText);
           responseText = "Thank you! We've received your contact number. Our sales team will reach out to you shortly to assist with your refrigeration needs.";
         } else {
-          await saveUserMessage(inputText);
           responseText = "Thank you for your message!\nPlease share your valid 10-digit contact number, and our sales team will get in touch with you shortly.";
         }
         
         const response = {
-          id: messages.length + 2,
+          id: updatedMessages.length + 1,
           text: responseText,
           sender: "agent"
         };
-        setMessages(prev => [...prev, response]);
+        const finalMessages = [...updatedMessages, response];
+        setMessages(finalMessages);
+        
+        // Save/update session with complete conversation
+        await createOrUpdateSession(finalMessages, phoneNumber);
       }, 1000);
       
       setInputText("");

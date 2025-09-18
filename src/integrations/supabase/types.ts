@@ -74,6 +74,30 @@ export type Database = {
         }
         Relationships: []
       }
+      chat_sessions: {
+        Row: {
+          conversation: Json
+          created_at: string
+          id: string
+          phone_number: string | null
+          session_id: string
+        }
+        Insert: {
+          conversation?: Json
+          created_at?: string
+          id?: string
+          phone_number?: string | null
+          session_id?: string
+        }
+        Update: {
+          conversation?: Json
+          created_at?: string
+          id?: string
+          phone_number?: string | null
+          session_id?: string
+        }
+        Relationships: []
+      }
       consultations: {
         Row: {
           company: string | null
