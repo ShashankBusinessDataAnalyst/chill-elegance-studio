@@ -1,5 +1,6 @@
 import { ArrowRight, Thermometer, Zap, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import displayRefrigerator from '@/assets/display-refrigerator.jpg';
 import blastChiller from '@/assets/blast-chiller.jpg';
 
@@ -91,10 +92,12 @@ export const Products = () => {
 
         {/* Bottom CTA */}
         <div className="text-center mt-16">
-          <Button size="lg" className="btn-premium text-lg px-8 py-6">
-            View Complete Catalog
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link to="/product-catalogue">
+            <Button size="lg" className="btn-premium text-lg px-8 py-6">
+              View Complete Catalog
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
