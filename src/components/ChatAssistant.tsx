@@ -25,16 +25,16 @@ const ChatAssistant = () => {
     return text.replace(/\D/g, '');
   };
 
-  const savePhoneNumber = async (phoneNumber: string, userMessage: string) => {
+  const saveUserMessage = async (userMessage: string, phoneNumber: string | null = null) => {
     try {
       await supabase
         .from('chat_interactions')
         .insert({
-          phone_number: phoneNumber,
+          phone_number: phoneNumber || '',
           user_message: userMessage
         });
     } catch (error) {
-      console.error('Error saving phone number:', error);
+      console.error('Error saving user message:', error);
     }
   };
 
@@ -52,10 +52,11 @@ const ChatAssistant = () => {
         let responseText;
         if (hasValid10DigitNumber(inputText)) {
           const phoneNumber = extractPhoneNumber(inputText);
-          await savePhoneNumber(phoneNumber, inputText);
+          await saveUserMessage(inputText, phoneNumber);
           responseText = "Thank you! We've received your contact number. Our sales team will reach out to you shortly to assist with your refrigeration needs.";
         } else {
-          responseText = "Please enter a valid 10-digit phone number so we can assist you with your commercial refrigeration needs.";
+          await saveUserMessage(inputText);
+          responseText = "Thank you for your message!\nPlease share your valid 10-digit contact number, and our sales team will get in touch with you shortly.";
         }
         
         const response = {
