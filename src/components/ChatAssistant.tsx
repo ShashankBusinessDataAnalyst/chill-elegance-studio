@@ -2,23 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { X, MessageCircle, Send } from 'lucide-react';
+import { X, Headphones, Send } from 'lucide-react';
 
 const ChatAssistant = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { id: 1, text: "Hello user! How can I help you today?", sender: "agent" }
   ]);
   const [inputText, setInputText] = useState("");
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 60000); // 1 minute
-
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleSendMessage = () => {
     if (inputText.trim()) {
@@ -57,7 +50,7 @@ const ChatAssistant = () => {
           onClick={() => setIsOpen(true)}
           className="rounded-full w-14 h-14 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg animate-bounce"
         >
-          <MessageCircle className="w-6 h-6" />
+          <Headphones className="w-6 h-6" />
         </Button>
       ) : (
         <Card className="w-80 h-96 shadow-lg border-0 bg-background">
