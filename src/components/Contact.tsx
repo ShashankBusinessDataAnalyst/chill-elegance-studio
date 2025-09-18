@@ -2,8 +2,78 @@ import { ArrowRight, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 export const Contact = () => {
+  const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
+  const [webhookUrl, setWebhookUrl] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    projectDetails: ''
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!webhookUrl) {
+      toast({
+        title: "Error",
+        description: "Please enter your Zapier webhook URL",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify({
+          ...formData,
+          timestamp: new Date().toISOString(),
+          triggered_from: window.location.origin,
+        }),
+      });
+
+      toast({
+        title: "Request Sent",
+        description: "Your consultation request was sent successfully! We'll get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        projectDetails: ''
+      });
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Failed to submit your request. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   const contactInfo = [
     {
       icon: Mail,
@@ -49,32 +119,78 @@ export const Contact = () => {
           {/* Contact Form */}
           <div className="card-premium p-8">
             <h3 className="text-2xl font-bold mb-6">Request a Consultation</h3>
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-sm font-medium mb-2">Zapier Webhook URL *</label>
+                <Input 
+                  type="url"
+                  placeholder="https://hooks.zapier.com/hooks/catch/..."
+                  value={webhookUrl}
+                  onChange={(e) => setWebhookUrl(e.target.value)}
+                  required 
+                />
+                <p className="text-xs text-muted-foreground mt-1">
+                  Create a Zap with Webhook trigger → Google Forms action, then paste the webhook URL here
+                </p>
+              </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Name *</label>
-                <Input placeholder="Your answer" required />
+                <Input 
+                  name="name"
+                  placeholder="Your answer" 
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Company</label>
-                <Input placeholder="Your answer" />
+                <Input 
+                  name="company"
+                  placeholder="Your answer"
+                  value={formData.company}
+                  onChange={handleInputChange}
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Email ID *</label>
-                <Input type="email" placeholder="Your answer" required />
+                <Input 
+                  name="email"
+                  type="email" 
+                  placeholder="Your answer"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Phone Number *</label>
-                <Input type="tel" placeholder="Your answer" required />
+                <Input 
+                  name="phone"
+                  type="tel" 
+                  placeholder="Your answer"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  required 
+                />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Project Details</label>
                 <Textarea 
+                  name="projectDetails"
                   placeholder="Your answer"
+                  value={formData.projectDetails}
+                  onChange={handleInputChange}
                   rows={4}
                 />
               </div>
-              <Button size="lg" className="w-full btn-premium text-lg py-6">
-                Send Message
+              <Button 
+                type="submit"
+                size="lg" 
+                className="w-full btn-premium text-lg py-6"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Sending...' : 'Send Message'}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </form>
