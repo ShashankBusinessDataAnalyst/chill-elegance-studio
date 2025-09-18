@@ -1,5 +1,6 @@
 import { Users, Building, Box, Calculator, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 export const Process = () => {
   const steps = [
@@ -110,13 +111,15 @@ export const Process = () => {
               Book Consultation
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
-            >
-              Visit Experience Center
-            </Button>
+            <Link to="/experience-center">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+              >
+                Visit Experience Center
+              </Button>
+            </Link>
           </div>
           
           {/* Trust Indicators */}
