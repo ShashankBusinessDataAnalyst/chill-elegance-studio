@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Calendar, Clock, ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,6 +18,7 @@ const ExperienceCenter = () => {
   const { toast } = useToast();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -59,12 +60,44 @@ const ExperienceCenter = () => {
 
   // Auto-slideshow with 3 second interval
   useEffect(() => {
-    const interval = setInterval(() => {
+    const startSlideshow = () => {
+      intervalRef.current = setInterval(() => {
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }, 3000);
+    };
+
+    startSlideshow();
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [slides.length]);
+
+  const resetSlideshow = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    intervalRef.current = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 3000);
+  };
 
-    return () => clearInterval(interval);
-  }, [slides.length]);
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+    resetSlideshow();
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    resetSlideshow();
+  };
+
+  const goToSlide = (index: number) => {
+    setCurrentSlide(index);
+    resetSlideshow();
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -117,18 +150,6 @@ const ExperienceCenter = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
   };
 
   return (
