@@ -179,7 +179,7 @@ const ExperienceCenter = () => {
             
             {/* Left Column - Image Slideshow */}
             <div className="relative">
-              <div className="relative h-[600px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
+              <div className="relative h-[550px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
                 <img
                   src={slides[currentSlide].image}
                   alt={slides[currentSlide].title}
