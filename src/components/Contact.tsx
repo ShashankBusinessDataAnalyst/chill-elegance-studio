@@ -50,30 +50,26 @@ export const Contact = () => {
           <div className="card-premium p-8">
             <h3 className="text-2xl font-bold mb-6">Request a Consultation</h3>
             <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Name *</label>
-                  <Input placeholder="Your full name" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Company</label>
-                  <Input placeholder="Restaurant/Business name" />
-                </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Name *</label>
+                <Input placeholder="Your answer" required />
               </div>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email *</label>
-                  <Input type="email" placeholder="your@email.com" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone</label>
-                  <Input type="tel" placeholder="+1 (555) 123-4567" />
-                </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Company</label>
+                <Input placeholder="Your answer" />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Email ID *</label>
+                <Input type="email" placeholder="Your answer" required />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                <Input type="tel" placeholder="Your answer" required />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Project Details</label>
                 <Textarea 
-                  placeholder="Tell us about your refrigeration needs, kitchen size, and any specific requirements..."
+                  placeholder="Your answer"
                   rows={4}
                 />
               </div>
