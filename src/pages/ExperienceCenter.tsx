@@ -158,7 +158,7 @@ const ExperienceCenter = () => {
       
       {/* Hero Section */}
       <section className="pt-36 pb-8 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto px-6 lg:px-8">
+        <div className="container mx-auto px-6 lg:px-6">
           <div className="text-center mb-6">
             <h1 className="heading-premium text-4xl lg:text-6xl mb-6">
               Visit Our Experience Center
@@ -179,7 +179,7 @@ const ExperienceCenter = () => {
             
             {/* Left Column - Image Slideshow */}
             <div className="relative">
-              <div className="relative h-[400px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
+              <div className="relative h-[600px] rounded-2xl overflow-hidden bg-gradient-to-r from-primary/10 to-gunmetal/10">
                 <img
                   src={slides[currentSlide].image}
                   alt={slides[currentSlide].title}
@@ -205,7 +205,7 @@ const ExperienceCenter = () => {
                 {/* Navigation Arrows */}
                 <button
                   onClick={prevSlide}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-200"
                 >
                   <ChevronLeft className="h-5 w-5 text-white" />
                 </button>
