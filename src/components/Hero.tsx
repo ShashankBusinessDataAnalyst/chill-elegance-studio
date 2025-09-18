@@ -56,7 +56,8 @@ export const Hero = () => {
               <Button 
                 size="lg" 
                 variant="outline" 
-                  className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                className="btn-premium text-lg px-8 py-6 border-red-500 text-red-500 hover:bg-red-500 hover:text-white"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Request Consultation
               </Button>
