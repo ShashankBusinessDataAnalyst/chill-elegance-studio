@@ -192,7 +192,7 @@ const ExperienceCenter = () => {
       
                 {/* Slide Content Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
-                  <div className="px-6 pb-6 text-white">
+                  <div className="px-3 pb-3 text-white">
                     <h3 className="text-xl md:text-2xl font-bold mb-2">
                       {slides[currentSlide].title}
                     </h3>
