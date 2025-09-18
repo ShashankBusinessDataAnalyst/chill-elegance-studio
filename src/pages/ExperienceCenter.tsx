@@ -28,15 +28,6 @@ const ExperienceCenter = () => {
     message: ''
   });
 
-  // Auto-slideshow with 1.5 second interval
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % 5); // 5 slides total
-    }, 1500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   // Slideshow images featuring hotels and chefs using our refrigeration products
   const slides = [
     {
@@ -65,6 +56,15 @@ const ExperienceCenter = () => {
       description: 'Luxury resorts choose our premium refrigeration solutions to maintain the highest culinary standards for their guests'
     }
   ];
+
+  // Auto-slideshow with 3 second interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
