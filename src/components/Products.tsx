@@ -59,7 +59,7 @@ export const Products = () => {
                 }}
                 className="block"
               >
-                <div className="card-premium p-8 group cursor-pointer">
+                <div className="card-premium p-8 group cursor-pointer h-full flex flex-col">
                   {/* Product Image */}
                   <div className="relative mb-6 overflow-hidden rounded-xl">
                     <img
@@ -82,7 +82,7 @@ export const Products = () => {
                   </p>
 
                   {/* Features */}
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-2 mb-6 flex-grow">
                     {product.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center gap-2 text-sm">
                         <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
@@ -92,10 +92,12 @@ export const Products = () => {
                   </ul>
 
                   {/* CTA */}
-                  <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <div className="mt-auto">
+                    <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                      Learn More
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
                 </div>
               </Link>
             );
