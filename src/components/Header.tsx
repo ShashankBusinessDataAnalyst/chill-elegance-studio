@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import williamsLogo from '@/assets/williams-logo.png';
 
 export const Header = () => {
@@ -15,11 +16,31 @@ export const Header = () => {
   };
 
   const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Product', href: '/#products' },
-    { name: 'Markets', href: '/#markets' },
-    { name: 'Experience Center', href: '/experience-center' },
-    { name: 'Contact', href: '/#contact' },
+    { 
+      name: 'Home', 
+      href: '/',
+      description: 'Return to our main page featuring premium commercial refrigeration solutions'
+    },
+    { 
+      name: 'Product', 
+      href: '/#products',
+      description: 'Explore our range of display cabinets, commercial refrigeration, and professional kitchen equipment'
+    },
+    { 
+      name: 'Markets', 
+      href: '/#markets',
+      description: 'Discover how we serve restaurants, hotels, supermarkets, and other commercial establishments'
+    },
+    { 
+      name: 'Experience Center', 
+      href: '/experience-center',
+      description: 'Visit our state-of-the-art showroom to see our products in action'
+    },
+    { 
+      name: 'Contact', 
+      href: '/#contact',
+      description: 'Get in touch with our team for quotes, support, and technical assistance'
+    },
   ];
 
   return (
@@ -40,13 +61,24 @@ export const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium"
-              >
-                {item.name}
-              </a>
+              <HoverCard key={item.name}>
+                <HoverCardTrigger asChild>
+                  <a
+                    href={item.href}
+                    className="text-foreground hover:text-primary transition-colors duration-200 font-medium cursor-pointer"
+                  >
+                    {item.name}
+                  </a>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-80 p-4">
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-semibold">{item.name}</h4>
+                    <p className="text-sm text-muted-foreground">
+                      {item.description}
+                    </p>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
             ))}
           </div>
 
