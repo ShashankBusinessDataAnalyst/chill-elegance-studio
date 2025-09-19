@@ -7,21 +7,21 @@ import blastChiller from '@/assets/blast-chiller.jpg';
 export const Products = () => {
   const products = [
     {
-      title: 'Display Refrigeration',
+      title: 'Display Cabinets',
       description: 'Premium glass-door display cabinets with LED lighting and precision temperature control for showcasing gourmet products.',
       image: displayRefrigerator,
       features: ['LED Interior Lighting', 'Energy Star Certified', 'Glass Door Design'],
       icon: Thermometer,
     },
     {
-      title: 'Blast Chillers',
+      title: 'Blast Chiller Cabinets',
       description: 'High-performance blast chillers for rapid cooling and freezing, essential for maintaining food quality and safety.',
       image: blastChiller,
       features: ['Rapid Cooling Technology', 'Digital Controls', 'Stainless Steel Construction'],
       icon: Zap,
     },
     {
-      title: 'Cold Storage Solutions',
+      title: 'Cold Storage Cabinets',
       description: 'Custom walk-in coolers and freezers designed for high-volume commercial operations with maximum efficiency.',
       image: displayRefrigerator, // Reusing image for demo
       features: ['Custom Sizing', 'Remote Monitoring', 'Eco-Friendly Refrigerants'],
