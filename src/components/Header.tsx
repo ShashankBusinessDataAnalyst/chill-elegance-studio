@@ -43,7 +43,7 @@ export const Header = () => {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-foreground hover:text-primary transition-all duration-200 font-medium hover:scale-120"
+                className="text-foreground hover:text-primary transition-all duration-200 font-medium hover:scale-110"
               >
                 {item.name}
               </a>
