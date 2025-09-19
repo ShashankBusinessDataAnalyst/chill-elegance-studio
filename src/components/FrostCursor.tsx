@@ -19,7 +19,7 @@ export const FrostCursor = () => {
       x: x + (Math.random() - 0.5) * 100,
       y: y,
       size: Math.random() * 4 + 2,
-      speed: Math.random() * 2 + 1,
+      speed: Math.random() * 4 + 3,
       opacity: Math.random() * 0.8 + 0.2,
     };
   }, []);
