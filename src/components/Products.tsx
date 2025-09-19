@@ -1,10 +1,19 @@
 import { ArrowRight, Thermometer, Zap, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import displayRefrigerator from '@/assets/display-refrigerator.jpg';
 import blastChiller from '@/assets/blast-chiller.jpg';
 
 export const Products = () => {
+  const navigate = useNavigate();
+
+  const handleProductClick = () => {
+    navigate('/product-catalogue');
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
+  };
   const products = [
     {
       title: 'Display Refrigeration',
@@ -65,7 +74,33 @@ export const Products = () => {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-2xl font-bold mb-4">{product.title}</h3>
+                <HoverCard>
+                  <HoverCardTrigger asChild>
+                    <h3 
+                      className="text-2xl font-bold mb-4 cursor-pointer hover:text-primary transition-colors duration-200"
+                      onClick={handleProductClick}
+                    >
+                      Cabinets
+                    </h3>
+                  </HoverCardTrigger>
+                  <HoverCardContent className="w-80">
+                    <div className="flex flex-col space-y-2">
+                      <h4 className="text-sm font-semibold">{product.title}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {product.description}
+                      </p>
+                      <div className="flex flex-col space-y-1 pt-2">
+                        <span className="text-xs font-medium text-muted-foreground">Key Features:</span>
+                        {product.features.map((feature, idx) => (
+                          <span key={idx} className="text-xs">• {feature}</span>
+                        ))}
+                      </div>
+                      <div className="pt-2">
+                        <span className="text-xs text-primary font-medium">Click to view full catalog →</span>
+                      </div>
+                    </div>
+                  </HoverCardContent>
+                </HoverCard>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
                   {product.description}
                 </p>
