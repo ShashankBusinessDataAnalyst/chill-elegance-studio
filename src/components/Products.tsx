@@ -1,30 +1,31 @@
 import { ArrowRight, Thermometer, Zap, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import displayRefrigerator from '@/assets/display-refrigerator.jpg';
-import blastChiller from '@/assets/blast-chiller.jpg';
+import displayCabinets from '@/assets/display-cabinets.jpg';
+import commercialRefrigeration from '@/assets/commercial-refrigeration.jpg';
+import professionalKitchenEquipment from '@/assets/professional-kitchen-equipment.jpg';
 
 export const Products = () => {
   const products = [
     {
       title: 'Display Cabinets',
       description: 'Premium glass-door display cabinets with LED lighting and precision temperature control for showcasing gourmet products.',
-      image: displayRefrigerator,
+      image: displayCabinets,
       features: ['LED Interior Lighting', 'Energy Star Certified', 'Glass Door Design'],
       icon: Thermometer,
     },
     {
-      title: 'Blast Chiller Cabinets',
-      description: 'High-performance blast chillers for rapid cooling and freezing, essential for maintaining food quality and safety.',
-      image: blastChiller,
+      title: 'Commercial Refrigeration',
+      description: 'High-performance commercial refrigeration solutions for rapid cooling and freezing, essential for maintaining food quality and safety.',
+      image: commercialRefrigeration,
       features: ['Rapid Cooling Technology', 'Digital Controls', 'Stainless Steel Construction'],
       icon: Zap,
     },
     {
-      title: 'Cold Storage Cabinets',
-      description: 'Custom walk-in coolers and freezers designed for high-volume commercial operations with maximum efficiency.',
-      image: displayRefrigerator, // Reusing image for demo
-      features: ['Custom Sizing', 'Remote Monitoring', 'Eco-Friendly Refrigerants'],
+      title: 'Professional Kitchen Equipment',
+      description: 'Complete line of professional kitchen equipment designed for high-volume commercial operations with maximum efficiency.',
+      image: professionalKitchenEquipment,
+      features: ['Custom Sizing', 'Remote Monitoring', 'Eco-Friendly Design'],
       icon: Shield,
     },
   ];
@@ -48,44 +49,55 @@ export const Products = () => {
           {products.map((product, index) => {
             const IconComponent = product.icon;
             return (
-              <div key={index} className="card-premium p-8 group">
-                {/* Product Image */}
-                <div className="relative mb-6 overflow-hidden rounded-xl">
-                  <img
-                    src={product.image}
-                    alt={product.title}
-                    className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <Link 
+                key={index}
+                to="/product-catalogue"
+                onClick={() => {
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }, 100);
+                }}
+                className="block"
+              >
+                <div className="card-premium p-8 group cursor-pointer">
+                  {/* Product Image */}
+                  <div className="relative mb-6 overflow-hidden rounded-xl">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+
+                  {/* Icon */}
+                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <IconComponent className="h-6 w-6 text-primary" />
+                  </div>
+
+                  {/* Content */}
+                  <h3 className="text-2xl font-bold mb-4">{product.title}</h3>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {product.description}
+                  </p>
+
+                  {/* Features */}
+                  <ul className="space-y-2 mb-6">
+                    {product.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-center gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* CTA */}
+                  <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
                 </div>
-
-                {/* Icon */}
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                  <IconComponent className="h-6 w-6 text-primary" />
-                </div>
-
-                {/* Content */}
-                <h3 className="text-2xl font-bold mb-4">{product.title}</h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {product.description}
-                </p>
-
-                {/* Features */}
-                <ul className="space-y-2 mb-6">
-                  {product.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center gap-2 text-sm">
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full"></div>
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
-                <Button variant="outline" className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
+              </Link>
             );
           })}
         </div>
