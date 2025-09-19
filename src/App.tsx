@@ -8,6 +8,7 @@ import ExperienceCenter from "./pages/ExperienceCenter";
 import ProductCatalogue from "./pages/ProductCatalogue";
 import NotFound from "./pages/NotFound";
 import ChatAssistant from "@/components/ChatAssistant";
+import { FrostCursor } from "@/components/FrostCursor";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
         </Routes>
       </BrowserRouter>
       <ChatAssistant />
+      <FrostCursor />
     </TooltipProvider>
   </QueryClientProvider>
 );
