@@ -4,15 +4,11 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { SidebarProvider } from '@/components/ui/sidebar';
-import { KitchenEquipmentSidebar } from '@/components/KitchenEquipmentSidebar';
 import commercialKitchen from '@/assets/commercial-kitchen.jpg';
 import professionalKitchenEquipment from '@/assets/professional-kitchen-equipment.jpg';
 
 const ProfessionalKitchenEquipment = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
-  const [activeBadgeFilter, setActiveBadgeFilter] = useState<string | null>(null);
-  const [activePriceFilter, setActivePriceFilter] = useState<string | null>(null);
   
   const products = [
     {
@@ -250,64 +246,15 @@ const ProfessionalKitchenEquipment = () => {
 
   const categories = [...new Set(products.map(product => product.category))];
   
-  // Helper function to parse price for filtering
-  const parsePrice = (price: string): number => {
-    return parseInt(price.replace(/[$,]/g, ''));
-  };
-
-  // Filter products based on all active filters
-  const filteredProducts = products.filter(product => {
-    // Category filter
-    const categoryMatch = activeCategory === 'All' || product.category === activeCategory;
-    
-    // Badge filter
-    const badgeMatch = !activeBadgeFilter || product.badge === activeBadgeFilter;
-    
-    // Price filter
-    let priceMatch = true;
-    if (activePriceFilter) {
-      const price = parsePrice(product.price);
-      switch (activePriceFilter) {
-        case 'under-5000':
-          priceMatch = price < 5000;
-          break;
-        case '5000-10000':
-          priceMatch = price >= 5000 && price <= 10000;
-          break;
-        case '10000-20000':
-          priceMatch = price >= 10000 && price <= 20000;
-          break;
-        case 'over-20000':
-          priceMatch = price > 20000;
-          break;
-        default:
-          priceMatch = true;
-      }
-    }
-    
-    return categoryMatch && badgeMatch && priceMatch;
-  });
+  const filteredProducts = activeCategory === 'All' 
+    ? products 
+    : products.filter(product => product.category === activeCategory);
 
   return (
-    <SidebarProvider>
-      <div className="min-h-screen bg-background w-full">
-        <Header />
-        
-        <div className="flex pt-20">
-          {/* Sidebar */}
-          <KitchenEquipmentSidebar
-            categories={categories}
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
-            onBadgeFilter={setActiveBadgeFilter}
-            activeBadgeFilter={activeBadgeFilter}
-            onPriceFilter={setActivePriceFilter}
-            activePriceFilter={activePriceFilter}
-          />
-
-          {/* Main Content */}
-          <div className="flex-1">
-            <main>
+    <div className="min-h-screen bg-background">
+      <Header />
+      
+      <main className="pt-20">
         {/* Hero Section */}
         <section className="py-12 bg-gradient-to-b from-primary/5 to-background">
           <div className="container mx-auto px-6 lg:px-8">
@@ -355,8 +302,8 @@ const ProfessionalKitchenEquipment = () => {
           </div>
         </section>
 
-        {/* Categories Filter - Now Hidden on Desktop (Sidebar handles this) */}
-        <section className="py-8 border-b lg:hidden">
+        {/* Categories Filter */}
+        <section className="py-8 border-b">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="flex flex-wrap justify-center gap-3">
               <Button 
@@ -476,13 +423,10 @@ const ProfessionalKitchenEquipment = () => {
             </div>
           </div>
         </section>
-            </main>
-          </div>
-        </div>
+      </main>
 
-        <Footer />
-      </div>
-    </SidebarProvider>
+      <Footer />
+    </div>
   );
 };
 
