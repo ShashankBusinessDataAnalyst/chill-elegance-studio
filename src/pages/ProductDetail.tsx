@@ -859,18 +859,16 @@ const ProductDetail = () => {
   return <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Blur overlay when modal is open */}
+      {/* Image Modal with blur overlay */}
       {isModalOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={closeModal}
-        />
-      )}
-      
-      {/* Image Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl max-h-[90vh] w-full">
+        >
+          <div 
+            className="relative max-w-4xl max-h-[90vh] w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
               onClick={closeModal}
               className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
