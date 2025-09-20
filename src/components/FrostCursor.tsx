@@ -64,9 +64,7 @@ export const FrostCursor = () => {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault();
-      
-      // Throttle touch events for better performance but still smooth
+      // Don't prevent scrolling, just add the effect
       const now = Date.now();
       if (now - lastTouchTime < 16) return; // ~60fps
       lastTouchTime = now;
@@ -95,8 +93,8 @@ export const FrostCursor = () => {
 
     // Add event listeners
     if (isMobile) {
-      document.addEventListener('touchstart', handleTouchStart, { passive: false });
-      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchstart', handleTouchStart, { passive: true });
+      document.addEventListener('touchmove', handleTouchMove, { passive: true });
       document.addEventListener('touchend', handleTouchEnd);
       document.addEventListener('touchcancel', handleTouchEnd);
     } else {
