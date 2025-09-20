@@ -368,67 +368,67 @@ const ProfessionalKitchenEquipment = () => {
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {filteredProducts.map((product) => (
-                  <div key={product.id} className="card-premium p-6 group hover:scale-105 transition-all duration-300 relative">
-                    {/* Badge on left side */}
-                    {product.badge && (
-                      <div className="absolute -top-2 -left-2 z-10">
-                        <span className={`px-3 py-1 text-xs rounded-full font-medium shadow-lg ${
-                          product.badge === 'New' 
-                            ? 'bg-green-500 text-white' 
-                            : 'bg-orange-500 text-white'
-                        }`}>
-                          {product.badge}
-                        </span>
+                  <Link key={product.id} to={`/product/${product.id}`} className="block">
+                    <div className="card-premium p-6 group hover:scale-105 transition-all duration-300 relative cursor-pointer">
+                      {/* Badge on left side */}
+                      {product.badge && (
+                        <div className="absolute -top-2 -left-2 z-10">
+                          <span className={`px-3 py-1 text-xs rounded-full font-medium shadow-lg ${
+                            product.badge === 'New' 
+                              ? 'bg-green-500 text-white' 
+                              : 'bg-orange-500 text-white'
+                          }`}>
+                            {product.badge}
+                          </span>
+                        </div>
+                      )}
+                      
+                      {/* Product Image */}
+                      <div className="relative mb-4 overflow-hidden rounded-xl">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute top-3 right-3">
+                          <span className="px-2 py-1 bg-primary text-primary-foreground text-xs rounded-full font-medium">
+                            {product.category}
+                          </span>
+                        </div>
                       </div>
-                    )}
-                    
-                    {/* Product Image */}
-                    <div className="relative mb-4 overflow-hidden rounded-xl">
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute top-3 right-3">
-                        <span className="px-2 py-1 bg-primary text-primary-foreground text-xs rounded-full font-medium">
-                          {product.category}
-                        </span>
+
+                    {/* Product Info */}
+                    <div className="space-y-3">
+                      <div>
+                        <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">
+                          {product.name}
+                        </h3>
+                        <p className="text-2xl font-bold text-primary mb-2">{product.price}</p>
                       </div>
-                    </div>
 
-                  {/* Product Info */}
-                  <div className="space-y-3">
-                    <div>
-                      <h3 className="font-bold text-lg mb-1 group-hover:text-primary transition-colors">
-                        {product.name}
-                      </h3>
-                      <p className="text-2xl font-bold text-primary mb-2">{product.price}</p>
-                    </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {product.description}
+                      </p>
 
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      {product.description}
-                    </p>
+                      {/* Features */}
+                      <ul className="space-y-1">
+                        {product.features.slice(0, 3).map((feature, index) => (
+                          <li key={index} className="flex items-center gap-2 text-xs">
+                            <div className="w-1 h-1 bg-primary rounded-full"></div>
+                            <span className="text-muted-foreground">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
 
-                    {/* Features */}
-                    <ul className="space-y-1">
-                      {product.features.slice(0, 3).map((feature, index) => (
-                        <li key={index} className="flex items-center gap-2 text-xs">
-                          <div className="w-1 h-1 bg-primary rounded-full"></div>
-                          <span className="text-muted-foreground">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* CTA */}
-                    <div className="pt-3">
-                      <Link to={`/product/${product.id}`}>
-                        <Button size="sm" className="w-full btn-premium text-sm">
+                      {/* CTA */}
+                      <div className="pt-3">
+                        <Button size="sm" className="w-full btn-premium text-sm pointer-events-none">
                           View Details
                         </Button>
-                      </Link>
+                      </div>
+                      </div>
                     </div>
-                    </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             )}
