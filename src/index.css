@@ -238,4 +238,18 @@ All colors MUST be HSL for proper theming.
     transform: translate(-50%, -50%);
     filter: blur(1px);
   }
+
+  /* Hotel Scrolling Animation */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll-left {
+    animation: scroll-left 30s linear infinite;
+  }
 }
