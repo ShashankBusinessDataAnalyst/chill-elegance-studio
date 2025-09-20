@@ -1089,9 +1089,7 @@ const ProductDetail = () => {
         <section className="py-12">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="text-center mb-8">
-              <h2 className="heading-premium text-2xl lg:text-3xl mb-4">
-                Related Products
-              </h2>
+              <h2 className="heading-premium text-2xl lg:text-3xl mb-4">Clients Using this Product</h2>
               <p className="text-muted-foreground">
                 Explore other equipment in the {product.category} category
               </p>
