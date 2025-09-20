@@ -12,6 +12,17 @@ interface SnowFlake {
 export const FrostCursor = () => {
   const [snowFlakes, setSnowFlakes] = useState<SnowFlake[]>([]);
   const [isMoving, setIsMoving] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const createSnowFlake = useCallback((x: number, y: number) => {
     return {
@@ -27,30 +38,64 @@ export const FrostCursor = () => {
   useEffect(() => {
     let moveTimeout: NodeJS.Timeout;
     
-    const handleMouseMove = (e: MouseEvent) => {
+    const createSnowflakesAtPosition = (x: number, y: number) => {
       setIsMoving(true);
       
       // Clear previous timeout
       clearTimeout(moveTimeout);
       
-      // Add new snowflakes
-      const newFlakes = Array.from({ length: 3 }, () => createSnowFlake(e.clientX, e.clientY));
+      // Add new snowflakes (more on mobile for better effect)
+      const flakeCount = isMobile ? 5 : 3;
+      const newFlakes = Array.from({ length: flakeCount }, () => createSnowFlake(x, y));
       
-      setSnowFlakes(prev => [...prev, ...newFlakes].slice(-50)); // Keep max 50 flakes
+      setSnowFlakes(prev => [...prev, ...newFlakes].slice(isMobile ? -80 : -50)); // Keep max 80 flakes on mobile, 50 on desktop
       
       // Stop creating snow after movement stops
       moveTimeout = setTimeout(() => {
         setIsMoving(false);
-      }, 100);
+      }, isMobile ? 200 : 100); // Longer timeout on mobile
+    };
+    
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isMobile) { // Only handle mouse on non-mobile devices
+        createSnowflakesAtPosition(e.clientX, e.clientY);
+      }
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault(); // Prevent scrolling interference
+      
+      // Handle multiple touch points
+      for (let i = 0; i < e.touches.length; i++) {
+        const touch = e.touches[i];
+        createSnowflakesAtPosition(touch.clientX, touch.clientY);
+      }
+    };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      // Create initial snowflakes on touch start
+      for (let i = 0; i < e.touches.length; i++) {
+        const touch = e.touches[i];
+        createSnowflakesAtPosition(touch.clientX, touch.clientY);
+      }
+    };
+
+    // Add event listeners
+    if (isMobile) {
+      document.addEventListener('touchstart', handleTouchStart, { passive: false });
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    } else {
+      document.addEventListener('mousemove', handleMouseMove);
+    }
 
     return () => {
+      // Remove event listeners
       document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
       clearTimeout(moveTimeout);
     };
-  }, [createSnowFlake]);
+  }, [createSnowFlake, isMobile]);
 
   // Animate snowflakes
   useEffect(() => {
