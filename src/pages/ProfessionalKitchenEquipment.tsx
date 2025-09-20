@@ -18,7 +18,8 @@ const ProfessionalKitchenEquipment = () => {
       price: '$12,500',
       description: 'High-performance convection oven with digital controls and steam injection',
       features: ['Digital temperature control', 'Steam injection system', '6 rack capacity', 'Energy efficient'],
-      category: 'Ovens'
+      category: 'Ovens',
+      badge: 'Best Seller'
     },
     {
       id: 2,
@@ -27,7 +28,8 @@ const ProfessionalKitchenEquipment = () => {
       price: '$8,900',
       description: 'Professional 6-burner gas range with griddle and double oven',
       features: ['6 high-BTU burners', 'Built-in griddle', 'Double oven', 'Heavy-duty construction'],
-      category: 'Ranges'
+      category: 'Ranges',
+      badge: 'New'
     },
     {
       id: 3,
@@ -54,7 +56,8 @@ const ProfessionalKitchenEquipment = () => {
       price: '$18,500',
       description: 'Multi-function cooking with steam and convection capabilities',
       features: ['Steam and convection modes', 'Programmable recipes', 'Water filtration', 'Self-cleaning'],
-      category: 'Ovens'
+      category: 'Ovens',
+      badge: 'Best Seller'
     },
     {
       id: 6,
@@ -81,7 +84,8 @@ const ProfessionalKitchenEquipment = () => {
       price: '$2,800',
       description: 'Heavy-duty food processor for prep work',
       features: ['Large capacity bowl', 'Multiple cutting discs', 'Variable speeds', 'Safety interlocks'],
-      category: 'Food Prep'
+      category: 'Food Prep',
+      badge: 'New'
     },
     {
       id: 9,
@@ -108,7 +112,8 @@ const ProfessionalKitchenEquipment = () => {
       price: '$15,600',
       description: 'Versatile tilting pan for braising, searing, and sautéing',
       features: ['40-gallon capacity', 'Tilting mechanism', 'Precise temperature control', 'Easy pour spout'],
-      category: 'Cooking Equipment'
+      category: 'Cooking Equipment',
+      badge: 'Best Seller'
     },
     {
       id: 12,
@@ -162,7 +167,8 @@ const ProfessionalKitchenEquipment = () => {
       price: '$12,800',
       description: 'Rapid cooling technology for food safety',
       features: ['Blast chill and freeze modes', 'Core probe monitoring', 'Programmable cycles', 'HACCP compliance'],
-      category: 'Cooling Equipment'
+      category: 'Cooling Equipment',
+      badge: 'New'
     },
     {
       id: 18,
@@ -334,19 +340,28 @@ const ProfessionalKitchenEquipment = () => {
               <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {filteredProducts.map((product) => (
                   <div key={product.id} className="card-premium p-6 group hover:scale-105 transition-all duration-300">
-                  {/* Product Image */}
-                  <div className="relative mb-4 overflow-hidden rounded-xl">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute top-3 right-3">
-                      <span className="px-2 py-1 bg-primary text-primary-foreground text-xs rounded-full font-medium">
-                        {product.category}
-                      </span>
+                    {/* Product Image */}
+                    <div className="relative mb-4 overflow-hidden rounded-xl">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute top-3 right-3 flex flex-col gap-2">
+                        <span className="px-2 py-1 bg-primary text-primary-foreground text-xs rounded-full font-medium">
+                          {product.category}
+                        </span>
+                        {product.badge && (
+                          <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                            product.badge === 'New' 
+                              ? 'bg-green-500 text-white' 
+                              : 'bg-orange-500 text-white'
+                          }`}>
+                            {product.badge}
+                          </span>
+                        )}
+                      </div>
                     </div>
-                  </div>
 
                   {/* Product Info */}
                   <div className="space-y-3">
