@@ -863,7 +863,7 @@ const ProductDetail = () => {
               {/* Product Image Slideshow */}
               <div className="space-y-4">
                 <div className="relative rounded-2xl overflow-hidden bg-secondary/10">
-                  <div className="relative w-full h-96 lg:h-[500px]">
+                  <div className="relative w-full h-[500px] lg:h-[600px]">
                     {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} />)}
                     
                     {/* Image indicators */}
