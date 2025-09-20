@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import ExperienceCenter from "./pages/ExperienceCenter";
 import ProductCatalogue from "./pages/ProductCatalogue";
 import ProfessionalKitchenEquipment from "./pages/ProfessionalKitchenEquipment";
+import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 import ChatAssistant from "@/components/ChatAssistant";
 import { FrostCursor } from "@/components/FrostCursor";
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/experience-center" element={<ExperienceCenter />} />
           <Route path="/product-catalogue" element={<ProductCatalogue />} />
           <Route path="/professional-kitchen-equipment" element={<ProfessionalKitchenEquipment />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

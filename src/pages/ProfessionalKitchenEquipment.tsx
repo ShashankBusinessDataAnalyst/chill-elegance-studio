@@ -421,9 +421,11 @@ const ProfessionalKitchenEquipment = () => {
 
                     {/* CTA */}
                     <div className="pt-3">
-                      <Button size="sm" className="w-full btn-premium text-sm">
-                        Request Quote
-                      </Button>
+                      <Link to={`/product/${product.id}`}>
+                        <Button size="sm" className="w-full btn-premium text-sm">
+                          View Details
+                        </Button>
+                      </Link>
                     </div>
                     </div>
                   </div>
