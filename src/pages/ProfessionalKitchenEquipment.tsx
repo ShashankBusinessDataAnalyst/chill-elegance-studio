@@ -3,10 +3,13 @@ import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import commercialKitchen from '@/assets/commercial-kitchen.jpg';
 import professionalKitchenEquipment from '@/assets/professional-kitchen-equipment.jpg';
 
 const ProfessionalKitchenEquipment = () => {
+  const [activeCategory, setActiveCategory] = useState<string>('All');
+  
   const products = [
     {
       id: 1,
@@ -236,6 +239,10 @@ const ProfessionalKitchenEquipment = () => {
   ];
 
   const categories = [...new Set(products.map(product => product.category))];
+  
+  const filteredProducts = activeCategory === 'All' 
+    ? products 
+    : products.filter(product => product.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-background">
@@ -293,11 +300,22 @@ const ProfessionalKitchenEquipment = () => {
         <section className="py-8 border-b">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="flex flex-wrap justify-center gap-3">
-              <Button variant="default" size="sm" className="btn-premium">
+              <Button 
+                variant={activeCategory === 'All' ? 'default' : 'outline'} 
+                size="sm" 
+                className={activeCategory === 'All' ? 'btn-premium' : 'hover:bg-primary hover:text-primary-foreground'}
+                onClick={() => setActiveCategory('All')}
+              >
                 All ({products.length})
               </Button>
               {categories.map((category) => (
-                <Button key={category} variant="outline" size="sm" className="hover:bg-primary hover:text-primary-foreground">
+                <Button 
+                  key={category} 
+                  variant={activeCategory === category ? 'default' : 'outline'} 
+                  size="sm" 
+                  className={activeCategory === category ? 'btn-premium' : 'hover:bg-primary hover:text-primary-foreground'}
+                  onClick={() => setActiveCategory(category)}
+                >
                   {category} ({products.filter(p => p.category === category).length})
                 </Button>
               ))}
@@ -308,9 +326,14 @@ const ProfessionalKitchenEquipment = () => {
         {/* Products Grid */}
         <section className="py-16">
           <div className="container mx-auto px-6 lg:px-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {products.map((product) => (
-                <div key={product.id} className="card-premium p-6 group hover:scale-105 transition-all duration-300">
+            {filteredProducts.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-xl text-muted-foreground">No products found in this category.</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                {filteredProducts.map((product) => (
+                  <div key={product.id} className="card-premium p-6 group hover:scale-105 transition-all duration-300">
                   {/* Product Image */}
                   <div className="relative mb-4 overflow-hidden rounded-xl">
                     <img
@@ -354,10 +377,11 @@ const ProfessionalKitchenEquipment = () => {
                         Request Quote
                       </Button>
                     </div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
