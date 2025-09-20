@@ -47,28 +47,44 @@ const ProductCatalogue = () => {
         <section className="py-20">
           <div className="container mx-auto px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
-              {categories.map((category, index) => <div key={index} className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
-                  {/* Product Image Container */}
-                  <div className="bg-secondary/20 rounded-2xl p-8 mb-6 aspect-square flex items-center justify-center overflow-hidden">
-                    <img src={category.image} alt={category.title} className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110" />
-                  </div>
+              {categories.map((category, index) => {
+                const isKitchenEquipment = category.title === 'Professional Kitchen Equipment';
+                
+                const cardContent = (
+                  <>
+                    {/* Product Image Container */}
+                    <div className="bg-secondary/20 rounded-2xl p-8 mb-6 aspect-square flex items-center justify-center overflow-hidden">
+                      <img src={category.image} alt={category.title} className="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-110" />
+                    </div>
 
-                  {/* Category Info */}
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
-                      {category.title}
-                    </h3>
-                    
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
-                      {category.description}
-                    </p>
+                    {/* Category Info */}
+                    <div className="text-center">
+                      <h3 className="text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
+                        {category.title}
+                      </h3>
+                      
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
+                        {category.description}
+                      </p>
 
-                    <button className="text-primary font-medium hover:text-primary/80 transition-colors duration-300 relative group/link">
-                      View all
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
-                    </button>
+                      <button className="text-primary font-medium hover:text-primary/80 transition-colors duration-300 relative group/link">
+                        {isKitchenEquipment ? 'View Products' : 'View all'}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
+                      </button>
+                    </div>
+                  </>
+                );
+                
+                return isKitchenEquipment ? (
+                  <Link key={index} to="/professional-kitchen-equipment" className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
+                    {cardContent}
+                  </Link>
+                ) : (
+                  <div key={index} className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
+                    {cardContent}
                   </div>
-                </div>)}
+                );
+              })}
             </div>
           </div>
         </section>
