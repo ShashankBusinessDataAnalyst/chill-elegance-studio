@@ -37,6 +37,7 @@ export const FrostCursor = () => {
 
   useEffect(() => {
     let moveTimeout: NodeJS.Timeout;
+    let lastTouchTime = 0;
     
     const createSnowflakesAtPosition = (x: number, y: number) => {
       setIsMoving(true);
@@ -48,24 +49,29 @@ export const FrostCursor = () => {
       const flakeCount = isMobile ? 5 : 3;
       const newFlakes = Array.from({ length: flakeCount }, () => createSnowFlake(x, y));
       
-      setSnowFlakes(prev => [...prev, ...newFlakes].slice(isMobile ? -80 : -50)); // Keep max 80 flakes on mobile, 50 on desktop
+      setSnowFlakes(prev => [...prev, ...newFlakes].slice(isMobile ? -80 : -50));
       
       // Stop creating snow after movement stops
       moveTimeout = setTimeout(() => {
         setIsMoving(false);
-      }, isMobile ? 200 : 100); // Longer timeout on mobile
+      }, isMobile ? 200 : 100);
     };
     
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isMobile) { // Only handle mouse on non-mobile devices
+      if (!isMobile) {
         createSnowflakesAtPosition(e.clientX, e.clientY);
       }
     };
 
     const handleTouchMove = (e: TouchEvent) => {
-      e.preventDefault(); // Prevent scrolling interference
+      e.preventDefault();
       
-      // Handle multiple touch points
+      // Throttle touch events for better performance but still smooth
+      const now = Date.now();
+      if (now - lastTouchTime < 16) return; // ~60fps
+      lastTouchTime = now;
+      
+      // Handle all active touch points
       for (let i = 0; i < e.touches.length; i++) {
         const touch = e.touches[i];
         createSnowflakesAtPosition(touch.clientX, touch.clientY);
@@ -80,10 +86,19 @@ export const FrostCursor = () => {
       }
     };
 
+    const handleTouchEnd = () => {
+      // Gradually stop creating snowflakes when touch ends
+      moveTimeout = setTimeout(() => {
+        setIsMoving(false);
+      }, 300);
+    };
+
     // Add event listeners
     if (isMobile) {
       document.addEventListener('touchstart', handleTouchStart, { passive: false });
       document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
+      document.addEventListener('touchcancel', handleTouchEnd);
     } else {
       document.addEventListener('mousemove', handleMouseMove);
     }
@@ -93,6 +108,8 @@ export const FrostCursor = () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('touchstart', handleTouchStart);
       document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchcancel', handleTouchEnd);
       clearTimeout(moveTimeout);
     };
   }, [createSnowFlake, isMobile]);
