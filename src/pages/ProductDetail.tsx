@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowLeft, Star, Shield, Zap, Award, CheckCircle, Info, Wrench, Package, TrendingUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
@@ -9,14 +9,38 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import commercialKitchen from '@/assets/commercial-kitchen.jpg';
 import professionalKitchenEquipment from '@/assets/professional-kitchen-equipment.jpg';
+import blastChiller from '@/assets/blast-chiller.jpg';
+import commercialRefrigeration from '@/assets/commercial-refrigeration.jpg';
+import displayCabinets from '@/assets/display-cabinets.jpg';
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  // Product images slideshow
+  const productImages = [
+    commercialKitchen,
+    professionalKitchenEquipment,
+    blastChiller,
+    commercialRefrigeration,
+    displayCabinets
+  ];
+
+  // Auto-cycle through images every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => 
+        (prevIndex + 1) % productImages.length
+      );
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [productImages.length]);
   
   // This would typically come from an API or database
   const products = [
@@ -1479,16 +1503,39 @@ const ProductDetail = () => {
             </Link>
 
             <div className="grid lg:grid-cols-2 gap-12">
-              {/* Product Image */}
+              {/* Product Image Slideshow */}
               <div className="space-y-4">
                 <div className="relative rounded-2xl overflow-hidden bg-secondary/10">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-96 lg:h-[500px] object-cover"
-                  />
+                  <div className="relative w-full h-96 lg:h-[500px]">
+                    {productImages.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt={`${product.name} - View ${index + 1}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                          index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      />
+                    ))}
+                    
+                    {/* Image indicators */}
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                      {productImages.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            index === currentImageIndex 
+                              ? 'bg-white scale-125' 
+                              : 'bg-white/50 hover:bg-white/75'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  
                   {product.badge && (
-                    <div className="absolute top-4 left-4">
+                    <div className="absolute top-4 left-4 z-10">
                       <Badge variant="secondary" className={`${
                         product.badge === 'New' 
                           ? 'bg-green-500 text-white hover:bg-green-600' 
