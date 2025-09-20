@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { ArrowLeft, Star, Shield, Zap, Award, CheckCircle, Info, Wrench, Package, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Star, Shield, Zap, Award, CheckCircle, Info, Wrench, Package, TrendingUp, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -17,6 +17,8 @@ const ProductDetail = () => {
     id
   } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalImageIndex, setModalImageIndex] = useState(0);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -26,13 +28,33 @@ const ProductDetail = () => {
   // Product images slideshow
   const productImages = [commercialKitchen, professionalKitchenEquipment, blastChiller, commercialRefrigeration, displayCabinets];
 
-  // Auto-cycle through images every 3 seconds
+  // Auto-cycle through images every 3 seconds (pause when modal is open)
   useEffect(() => {
+    if (isModalOpen) return; // Don't cycle when modal is open
+    
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % productImages.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [productImages.length]);
+  }, [productImages.length, isModalOpen]);
+
+  // Modal navigation functions
+  const openModal = (index: number) => {
+    setModalImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const nextModalImage = () => {
+    setModalImageIndex((prev) => (prev + 1) % productImages.length);
+  };
+
+  const prevModalImage = () => {
+    setModalImageIndex((prev) => (prev - 1 + productImages.length) % productImages.length);
+  };
 
   // This would typically come from an API or database
   const products = [{
@@ -837,6 +859,56 @@ const ProductDetail = () => {
   return <div className="min-h-screen bg-background">
       <Header />
       
+      {/* Blur overlay when modal is open */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" 
+          onClick={closeModal}
+        />
+      )}
+      
+      {/* Image Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="relative max-w-4xl max-h-[90vh] w-full">
+            <button
+              onClick={closeModal}
+              className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors z-10"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            
+            <div className="relative bg-black rounded-lg overflow-hidden">
+              <img
+                src={productImages[modalImageIndex]}
+                alt={`${product.name} - View ${modalImageIndex + 1}`}
+                className="w-full h-auto max-h-[80vh] object-contain"
+              />
+              
+              {/* Navigation buttons */}
+              <button
+                onClick={prevModalImage}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              
+              <button
+                onClick={nextModalImage}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+              
+              {/* Image counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                {modalImageIndex + 1} / {productImages.length}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <main className="pt-20">
         {/* Breadcrumb */}
         <section className="py-4 border-b">
@@ -864,7 +936,7 @@ const ProductDetail = () => {
               <div className="space-y-4">
                 <div className="relative rounded-2xl overflow-hidden bg-secondary/10">
                   <div className="relative w-full h-[500px] lg:h-[600px]">
-                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} />)}
+                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer hover:opacity-90 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onClick={() => openModal(index)} />)}
                     
                     {/* Image indicators */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
