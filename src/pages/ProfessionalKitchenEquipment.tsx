@@ -9,6 +9,7 @@ import professionalKitchenEquipment from '@/assets/professional-kitchen-equipmen
 
 const ProfessionalKitchenEquipment = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [activeBadge, setActiveBadge] = useState<string>('All');
   
   const products = [
     {
@@ -245,10 +246,13 @@ const ProfessionalKitchenEquipment = () => {
   ];
 
   const categories = [...new Set(products.map(product => product.category))];
+  const badges = ['All', 'New', 'Best Seller'];
   
-  const filteredProducts = activeCategory === 'All' 
-    ? products 
-    : products.filter(product => product.category === activeCategory);
+  const filteredProducts = products.filter(product => {
+    const categoryMatch = activeCategory === 'All' || product.category === activeCategory;
+    const badgeMatch = activeBadge === 'All' || product.badge === activeBadge;
+    return categoryMatch && badgeMatch;
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -305,26 +309,51 @@ const ProfessionalKitchenEquipment = () => {
         {/* Categories Filter */}
         <section className="py-8 border-b">
           <div className="container mx-auto px-6 lg:px-8">
-            <div className="flex flex-wrap justify-center gap-3">
-              <Button 
-                variant={activeCategory === 'All' ? 'default' : 'outline'} 
-                size="sm" 
-                className={activeCategory === 'All' ? 'btn-premium' : 'hover:bg-primary hover:text-primary-foreground'}
-                onClick={() => setActiveCategory('All')}
-              >
-                All ({products.length})
-              </Button>
-              {categories.map((category) => (
-                <Button 
-                  key={category} 
-                  variant={activeCategory === category ? 'default' : 'outline'} 
-                  size="sm" 
-                  className={activeCategory === category ? 'btn-premium' : 'hover:bg-primary hover:text-primary-foreground'}
-                  onClick={() => setActiveCategory(category)}
-                >
-                  {category} ({products.filter(p => p.category === category).length})
-                </Button>
-              ))}
+            <div className="space-y-4">
+              {/* Category Filters */}
+              <div>
+                <h3 className="text-sm font-medium text-muted-foreground mb-3 text-center">Categories</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  <Button 
+                    variant={activeCategory === 'All' ? 'default' : 'outline'} 
+                    size="sm" 
+                    className={activeCategory === 'All' ? 'btn-premium' : 'hover:bg-primary hover:text-primary-foreground'}
+                    onClick={() => setActiveCategory('All')}
+                  >
+                    All ({products.length})
+                  </Button>
+                  {categories.map((category) => (
+                    <Button 
+                      key={category} 
+                      variant={activeCategory === category ? 'default' : 'outline'} 
+                      size="sm" 
+                      className={activeCategory === category ? 'btn-premium' : 'hover:bg-primary hover:text-primary-foreground'}
+                      onClick={() => setActiveCategory(category)}
+                    >
+                      {category} ({products.filter(p => p.category === category).length})
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Badge Filters */}
+              <div>
+                <h3 className="text-sm font-medium text-muted-foreground mb-3 text-center">Special Offers</h3>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {badges.map((badge) => (
+                    <Button 
+                      key={badge} 
+                      variant={activeBadge === badge ? 'default' : 'outline'} 
+                      size="sm" 
+                      className={activeBadge === badge ? 'btn-premium' : 'hover:bg-primary hover:text-primary-foreground'}
+                      onClick={() => setActiveBadge(badge)}
+                    >
+                      {badge} {badge !== 'All' && `(${products.filter(p => p.badge === badge).length})`}
+                      {badge === 'All' && `(${products.length})`}
+                    </Button>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -339,7 +368,20 @@ const ProfessionalKitchenEquipment = () => {
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 {filteredProducts.map((product) => (
-                  <div key={product.id} className="card-premium p-6 group hover:scale-105 transition-all duration-300">
+                  <div key={product.id} className="card-premium p-6 group hover:scale-105 transition-all duration-300 relative">
+                    {/* Badge on left side */}
+                    {product.badge && (
+                      <div className="absolute -top-2 -left-2 z-10">
+                        <span className={`px-3 py-1 text-xs rounded-full font-medium shadow-lg ${
+                          product.badge === 'New' 
+                            ? 'bg-green-500 text-white' 
+                            : 'bg-orange-500 text-white'
+                        }`}>
+                          {product.badge}
+                        </span>
+                      </div>
+                    )}
+                    
                     {/* Product Image */}
                     <div className="relative mb-4 overflow-hidden rounded-xl">
                       <img
@@ -347,19 +389,10 @@ const ProfessionalKitchenEquipment = () => {
                         alt={product.name}
                         className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                       />
-                      <div className="absolute top-3 right-3 flex flex-col gap-2">
+                      <div className="absolute top-3 right-3">
                         <span className="px-2 py-1 bg-primary text-primary-foreground text-xs rounded-full font-medium">
                           {product.category}
                         </span>
-                        {product.badge && (
-                          <span className={`px-2 py-1 text-xs rounded-full font-medium ${
-                            product.badge === 'New' 
-                              ? 'bg-green-500 text-white' 
-                              : 'bg-orange-500 text-white'
-                          }`}>
-                            {product.badge}
-                          </span>
-                        )}
                       </div>
                     </div>
 
