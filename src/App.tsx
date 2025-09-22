@@ -7,6 +7,8 @@ import Index from "./pages/Index";
 import ExperienceCenter from "./pages/ExperienceCenter";
 import ProductCatalogue from "./pages/ProductCatalogue";
 import ProfessionalKitchenEquipment from "./pages/ProfessionalKitchenEquipment";
+import DisplayCabinets from "./pages/DisplayCabinets";
+import CommercialRefrigeration from "./pages/CommercialRefrigeration";
 import ProductDetail from "./pages/ProductDetail";
 import NotFound from "./pages/NotFound";
 import ChatAssistant from "@/components/ChatAssistant";
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/experience-center" element={<ExperienceCenter />} />
           <Route path="/product-catalogue" element={<ProductCatalogue />} />
           <Route path="/professional-kitchen-equipment" element={<ProfessionalKitchenEquipment />} />
+          <Route path="/display-cabinets" element={<DisplayCabinets />} />
+          <Route path="/commercial-refrigeration" element={<CommercialRefrigeration />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

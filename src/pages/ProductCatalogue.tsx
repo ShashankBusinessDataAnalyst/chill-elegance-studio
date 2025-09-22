@@ -75,15 +75,31 @@ const ProductCatalogue = () => {
                   </>
                 );
                 
-                return isKitchenEquipment ? (
-                  <Link key={index} to="/professional-kitchen-equipment" className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
-                    {cardContent}
-                  </Link>
-                ) : (
-                  <div key={index} className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
-                    {cardContent}
-                  </div>
-                );
+                if (isKitchenEquipment) {
+                  return (
+                    <Link key={index} to="/professional-kitchen-equipment" className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
+                      {cardContent}
+                    </Link>
+                  );
+                } else if (category.title === 'Display Cabinets') {
+                  return (
+                    <Link key={index} to="/display-cabinets" className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
+                      {cardContent}
+                    </Link>
+                  );
+                } else if (category.title === 'Commercial Refrigeration') {
+                  return (
+                    <Link key={index} to="/commercial-refrigeration" className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
+                      {cardContent}
+                    </Link>
+                  );
+                } else {
+                  return (
+                    <div key={index} className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-[var(--shadow-elegant)]">
+                      {cardContent}
+                    </div>
+                  );
+                }
               })}
             </div>
           </div>
