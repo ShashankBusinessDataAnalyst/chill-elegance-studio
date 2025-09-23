@@ -23,6 +23,7 @@ const ProductDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -939,40 +940,26 @@ const ProductDetail = () => {
 
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Product Image Slideshow */}
-              <div className="space-y-4">
-                <div className="relative rounded-2xl overflow-hidden bg-secondary/10">
+                <div className="space-y-4">
+                <div 
+                  className="relative rounded-2xl overflow-hidden bg-secondary/10"
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
                   <div className="relative w-full h-[500px] lg:h-[600px]">
-                    {productImages.map((image, index) => (
-                      <img 
-                        key={index} 
-                        src={image} 
-                        alt={`${product.name} - View ${index + 1}`} 
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer hover:opacity-90 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} 
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                        onClick={() => openModal(index)} 
-                      />
-                    ))}
+                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer hover:opacity-90 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onClick={() => openModal(index)} />)}
                     
                     {/* Image indicators */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
-                      {productImages.map((_, index) => (
-                        <button 
-                          key={index} 
-                          onClick={() => setCurrentImageIndex(index)} 
-                          className={`w-4 h-4 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'}`} 
-                        />
-                      ))}
+                      {productImages.map((_, index) => <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-4 h-4 rounded-full transition-all duration-300 ${index === currentImageIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/75'}`} />)}
                     </div>
                   </div>
                   
-                  {product.badge && (
-                    <div className="absolute top-4 left-4 z-10">
+                  {product.badge && <div className="absolute top-4 left-4 z-10">
                       <Badge variant="secondary" className={`${product.badge === 'New' ? 'bg-green-500 text-white hover:bg-green-600' : 'bg-orange-500 text-white hover:bg-orange-600'}`}>
                         {product.badge}
                       </Badge>
-                    </div>
-                  )}
+                    </div>}
                 </div>
               </div>
 
