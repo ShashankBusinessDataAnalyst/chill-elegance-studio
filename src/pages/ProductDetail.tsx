@@ -22,6 +22,7 @@ const ProductDetail = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -31,15 +32,15 @@ const ProductDetail = () => {
   // Product images slideshow
   const productImages = [OneDoorCabinet, sOneDoorCabinet, blastChiller, commercialRefrigeration, displayCabinets];
 
-  // Auto-cycle through images every 3 seconds (pause when modal is open)
+  // Auto-cycle through images every 3 seconds (pause when modal is open or hovered)
   useEffect(() => {
-    if (isModalOpen) return; // Don't cycle when modal is open
+    if (isModalOpen || isHovered) return; // Don't cycle when modal is open or hovered
     
     const interval = setInterval(() => {
       setCurrentImageIndex(prevIndex => (prevIndex + 1) % productImages.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [productImages.length, isModalOpen]);
+  }, [productImages.length, isModalOpen, isHovered]);
 
   // Modal navigation functions
   const openModal = (index: number) => {
@@ -934,8 +935,12 @@ const ProductDetail = () => {
 
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Product Image Slideshow */}
-              <div className="space-y-4">
-                <div className="relative rounded-2xl overflow-hidden bg-secondary/10">
+                <div className="space-y-4">
+                <div 
+                  className="relative rounded-2xl overflow-hidden bg-secondary/10"
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
                   <div className="relative w-full h-[500px] lg:h-[600px]">
                     {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer hover:opacity-90 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onClick={() => openModal(index)} />)}
                     
