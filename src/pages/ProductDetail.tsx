@@ -14,7 +14,7 @@ import commercialRefrigeration from '@/assets/commercial-refrigeration.jpg';
 import displayCabinets from '@/assets/display-cabinets.jpg';
 import OneDoorCabinet from '@/assets/RC_OneFoorFV.png';
 import sOneDoorCabinet from '@/assets/RC_OneFoorSV.png';
-
+import s2OneDoorCabinet from '@/assets/RC_OneFoorSV2.png';
 const ProductDetail = () => {
   const {
     id
@@ -38,7 +38,7 @@ const ProductDetail = () => {
   }, [id]);
 
   // Product images slideshow
-      const productImages = [OneDoorCabinet, sOneDoorCabinet, commercialRefrigeration, displayCabinets , blastChiller ];
+      const productImages = [OneDoorCabinet, sOneDoorCabinet, commercialRefrigeration, s2OneDoorCabinet , blastChiller ];
 
   // Auto-cycle through images every 3 seconds (pause when modal is open or hovered)
   useEffect(() => {
