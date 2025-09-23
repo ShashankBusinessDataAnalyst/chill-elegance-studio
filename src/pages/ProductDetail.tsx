@@ -14,7 +14,7 @@ import commercialRefrigeration from '@/assets/commercial-refrigeration.jpg';
 import displayCabinets from '@/assets/display-cabinets.jpg';
 import OneDoorCabinet from '@/assets/RC_OneFoorFV.png';
 import sOneDoorCabinet from '@/assets/RC_OneFoorSV.png';
-import s2OneDoorCabinet from '@/assets/RC_OneFoorSV2.png';
+import s2OneDoorCabinet from '@/assets/RC_OneFoorSV2.jpg';
 const ProductDetail = () => {
   const {
     id
