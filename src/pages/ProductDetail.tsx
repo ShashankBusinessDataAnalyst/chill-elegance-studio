@@ -22,6 +22,7 @@ const ProductDetail = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
   
 
   // Scroll to top when component mounts
@@ -32,10 +33,10 @@ const ProductDetail = () => {
   // Product images slideshow
       const productImages = [OneDoorCabinet, sOneDoorCabinet, commercialRefrigeration, displayCabinets , blastChiller ];
 
-  // Auto-cycle through images every 3 seconds (pause when modal is open)
+  // Auto-cycle through images every 3 seconds (pause when modal is open or hovered)
   useEffect(() => {
-    // Don't run slideshow if modal is open
-    if (isModalOpen) {
+    // Don't run slideshow if modal is open or if hovering
+    if (isModalOpen || isHovered) {
       return;
     }
 
@@ -44,7 +45,7 @@ const ProductDetail = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [productImages.length, isModalOpen]);
+  }, [productImages.length, isModalOpen, isHovered]);
 
   // Modal navigation functions
   const openModal = (index: number) => {
@@ -944,7 +945,7 @@ const ProductDetail = () => {
                   className="relative rounded-2xl overflow-hidden bg-secondary/10"
                 >
                   <div className="relative w-full h-[500px] lg:h-[600px]">
-                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onClick={() => openModal(index)} />)}
+                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => openModal(index)} />)}
                     
                     {/* Image indicators */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
