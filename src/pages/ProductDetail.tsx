@@ -944,7 +944,7 @@ const ProductDetail = () => {
                   className="relative rounded-2xl overflow-hidden bg-secondary/10"
                 >
                   <div className="relative w-full h-[500px] lg:h-[600px]">
-                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer hover:opacity-90 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onClick={() => openModal(index)} />)}
+                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onClick={() => openModal(index)} />)}
                     
                     {/* Image indicators */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
