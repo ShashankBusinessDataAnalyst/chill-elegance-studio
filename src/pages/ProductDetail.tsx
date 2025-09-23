@@ -12,6 +12,9 @@ import professionalKitchenEquipment from '@/assets/professional-kitchen-equipmen
 import blastChiller from '@/assets/blast-chiller.jpg';
 import commercialRefrigeration from '@/assets/commercial-refrigeration.jpg';
 import displayCabinets from '@/assets/display-cabinets.jpg';
+import OneDoorCabinet from '@/assets/RC_OneFoorFV.png';
+import sOneDoorCabinet from '@/assets/RC_OneFoorSV.png';
+
 const ProductDetail = () => {
   const {
     id
@@ -26,7 +29,7 @@ const ProductDetail = () => {
   }, [id]);
 
   // Product images slideshow
-  const productImages = [commercialKitchen, professionalKitchenEquipment, blastChiller, commercialRefrigeration, displayCabinets];
+  const productImages = [OneDoorCabinet, sOneDoorCabinet, blastChiller, commercialRefrigeration, displayCabinets];
 
   // Auto-cycle through images every 3 seconds (pause when modal is open)
   useEffect(() => {
@@ -59,12 +62,12 @@ const ProductDetail = () => {
   // This would typically come from an API or database
   const products = [{
     id: 1,
-    name: 'Industrial Convection Oven',
-    image: commercialKitchen,
-    price: '$12,500',
-    description: 'High-performance convection oven with digital controls and steam injection',
+    name: 'One Door Cabinet',
+    image: OneDoorCabinet,
+    price: '1,10,000',
+    description: 'Pre-fabricated walk-in cooler with insulated panels',
     features: ['Digital temperature control', 'Steam injection system', '6 rack capacity', 'Energy efficient'],
-    category: 'Ovens',
+    category: 'Refrigerated Cabinets',
     badge: 'Best Seller',
     specifications: {
       dimensions: '36" W x 30" D x 42" H',
@@ -74,12 +77,12 @@ const ProductDetail = () => {
       temperature: '200°F - 500°F'
     },
     overview: {
-      description: 'Our Industrial Convection Oven represents the pinnacle of commercial baking technology. Engineered for high-volume operations, this oven delivers consistent, even cooking results through advanced air circulation technology.',
-      keyBenefits: ['Uniform heat distribution ensures consistent results', 'Steam injection system for perfect bread and pastries', 'Energy-efficient design reduces operating costs', 'Digital controls with programmable recipes', 'Self-cleaning cycle saves maintenance time']
+      description: 'Our Commercial Refrigeration Cabinets are engineered to meet the rigorous demands of modern professional kitchens. Designed for both efficiency and durability, these cabinets provide reliable temperature control, optimal storage conditions, and user-friendly operation — all within a sleek, stainless steel design.',
+      keyBenefits: ['Energy-efficient compressor ensures powerful cooling with lower operating costs', 'Automatic defrost keeps the system running at peak performance', 'Durable stainless steel construction for a hygienic, long-lasting finish', 'Digital controls with display for precise temperature management', 'Top-mounted ventilation ideal for enclosed or tight kitchen spaces']
     },
     design: {
       description: 'Crafted with both functionality and aesthetics in mind, this convection oven features a sleek stainless steel exterior that complements any professional kitchen environment.',
-      designFeatures: ['Seamless stainless steel construction', 'Double-paned glass doors with interior lighting', 'Ergonomic handle design for easy operation', 'Compact footprint maximizes kitchen space', 'Modern digital display interface']
+      designFeatures: ['Removable anti-tilt tray slides provide safe and flexible storage options', 'Stainless steel interior and exterior for durability, hygiene, and a professional finish', 'UV-tinted, Low-E double-pane glass door minimizes heat transfer and protects contents.', 'Top-mounted ventilation system maximizes cooling efficiency in tight or enclosed spaces', 'Adjustable legs ensure stability and level installation on uneven floors']
     },
     materials: {
       description: 'Built to withstand the rigors of commercial use, every component is selected for durability, food safety, and easy maintenance.',
