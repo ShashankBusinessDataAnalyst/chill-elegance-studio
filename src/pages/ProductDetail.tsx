@@ -25,6 +25,13 @@ const ProductDetail = () => {
   const [isHovered, setIsHovered] = useState(false);
   
 
+  // Debug modal image index
+  useEffect(() => {
+    if (isModalOpen) {
+      console.log('Modal opened with modalImageIndex:', modalImageIndex, 'Image:', productImages[modalImageIndex]);
+    }
+  }, [isModalOpen, modalImageIndex]);
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -49,6 +56,7 @@ const ProductDetail = () => {
 
   // Modal navigation functions
   const openModal = (index: number) => {
+    console.log('Opening modal with index:', index, 'Image:', productImages[index]);
     setModalImageIndex(index);
     setIsModalOpen(true);
   };
@@ -945,7 +953,13 @@ const ProductDetail = () => {
                   className="relative rounded-2xl overflow-hidden bg-secondary/10"
                 >
                   <div className="relative w-full h-[500px] lg:h-[600px]">
-                    {productImages.map((image, index) => <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => openModal(index)} />)}
+                     {productImages.map((image, index) => {
+                       console.log('Rendering slideshow image at index:', index, 'Image:', image);
+                       return <img key={index} src={image} alt={`${product.name} - View ${index + 1}`} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 cursor-pointer ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} onClick={() => {
+                         console.log('Clicked image at index:', index);
+                         openModal(index);
+                       }} />
+                     })}
                     
                     {/* Image indicators */}
                     <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
