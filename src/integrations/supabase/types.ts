@@ -53,27 +53,6 @@ export type Database = {
         }
         Relationships: []
       }
-      chat_interactions: {
-        Row: {
-          created_at: string
-          id: string
-          phone_number: string
-          user_message: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          phone_number: string
-          user_message: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          phone_number?: string
-          user_message?: string
-        }
-        Relationships: []
-      }
       chat_sessions: {
         Row: {
           conversation: Json
@@ -125,6 +104,188 @@ export type Database = {
           name?: string | null
           phone?: string | null
           project_details?: string | null
+        }
+        Relationships: []
+      }
+      product_details: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          product_id: string
+          section_description: string
+          section_items: Json
+          section_title: string
+          section_type: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          product_id: string
+          section_description: string
+          section_items?: Json
+          section_title: string
+          section_type: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          product_id?: string
+          section_description?: string
+          section_items?: Json
+          section_title?: string
+          section_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_details_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_features: {
+        Row: {
+          created_at: string
+          display_order: number
+          feature_text: string
+          id: string
+          product_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          feature_text: string
+          id?: string
+          product_id: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          feature_text?: string
+          id?: string
+          product_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_features_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_images: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          display_order: number
+          id: string
+          image_url: string
+          is_primary: boolean
+          product_id: string
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url: string
+          is_primary?: boolean
+          product_id: string
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          display_order?: number
+          id?: string
+          image_url?: string
+          is_primary?: boolean
+          product_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_images_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      product_specifications: {
+        Row: {
+          created_at: string
+          display_order: number
+          id: string
+          product_id: string
+          spec_name: string
+          spec_value: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          product_id: string
+          spec_name: string
+          spec_value: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number
+          id?: string
+          product_id?: string
+          spec_name?: string
+          spec_value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_specifications_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          badge: string | null
+          category: string
+          created_at: string
+          description: string
+          id: string
+          is_active: boolean
+          name: string
+          price: string
+          updated_at: string
+        }
+        Insert: {
+          badge?: string | null
+          category: string
+          created_at?: string
+          description: string
+          id?: string
+          is_active?: boolean
+          name: string
+          price: string
+          updated_at?: string
+        }
+        Update: {
+          badge?: string | null
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          is_active?: boolean
+          name?: string
+          price?: string
+          updated_at?: string
         }
         Relationships: []
       }
