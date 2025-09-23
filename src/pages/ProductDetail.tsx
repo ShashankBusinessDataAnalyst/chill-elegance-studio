@@ -30,7 +30,7 @@ const ProductDetail = () => {
   }, [id]);
 
   // Product images slideshow
-  const productImages = [OneDoorCabinet, sOneDoorCabinet, blastChiller, commercialRefrigeration, displayCabinets];
+      const productImages = [OneDoorCabinet, sOneDoorCabinet, commercialRefrigeration, displayCabinets , blastChiller ];
 
   // Auto-cycle through images every 3 seconds (pause when modal is open)
   useEffect(() => {
