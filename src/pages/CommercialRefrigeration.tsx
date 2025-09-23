@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import commercialRefrigeration from '@/assets/commercial-refrigeration.jpg';
+import OneDoorCabinet from '@/assets/RC_OneFoorFV.png';
 import blastChiller from '@/assets/blast-chiller.jpg';
 
 const CommercialRefrigeration = () => {
@@ -14,12 +15,12 @@ const CommercialRefrigeration = () => {
   const products = [
     {
       id: 1,
-      name: 'Walk-in Cooler 8x10',
-      image: commercialRefrigeration,
-      price: '$15,500',
+      name: 'One Door Cabinet',
+      image: OneDoorCabinet ,
+      price: 'na',
       description: 'Pre-fabricated walk-in cooler with insulated panels',
-      features: ['8x10 foot size', 'Self-closing door', 'Digital controls', 'Energy efficient'],
-      category: 'Walk-in Coolers',
+      features: ['3x7 foot size', 'Self-closing door', 'Digital controls', 'Energy efficient'],
+      category: 'Refrigerated Cabinets',
       badge: 'Best Seller'
     },
     {
