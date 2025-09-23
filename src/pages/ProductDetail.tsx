@@ -34,17 +34,16 @@ const ProductDetail = () => {
 
   // Auto-cycle through images every 3 seconds (pause when modal is open or hovered)
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
-
-    if (!isModalOpen && !isHovered) {
-      interval = setInterval(() => {
-        setCurrentImageIndex(prevIndex => (prevIndex + 1) % productImages.length);
-      }, 3000);
+    // Don't run slideshow if modal is open or area is hovered
+    if (isModalOpen || isHovered) {
+      return;
     }
 
-    return () => {
-      if (interval) clearInterval(interval);
-    };
+    const interval = setInterval(() => {
+      setCurrentImageIndex(prevIndex => (prevIndex + 1) % productImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
   }, [productImages.length, isModalOpen, isHovered]);
 
   // Modal navigation functions
