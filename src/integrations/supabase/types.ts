@@ -53,27 +53,6 @@ export type Database = {
         }
         Relationships: []
       }
-      chat_interactions: {
-        Row: {
-          created_at: string
-          id: string
-          phone_number: string
-          user_message: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          phone_number: string
-          user_message: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          phone_number?: string
-          user_message?: string
-        }
-        Relationships: []
-      }
       chat_sessions: {
         Row: {
           conversation: Json
@@ -125,6 +104,122 @@ export type Database = {
           name?: string | null
           phone?: string | null
           project_details?: string | null
+        }
+        Relationships: []
+      }
+      product_images: {
+        Row: {
+          alt_text: string | null
+          created_at: string
+          display_order: number | null
+          id: string
+          image_url: string
+          is_primary: boolean | null
+          product_id: string
+        }
+        Insert: {
+          alt_text?: string | null
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_url: string
+          is_primary?: boolean | null
+          product_id: string
+        }
+        Update: {
+          alt_text?: string | null
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          image_url?: string
+          is_primary?: boolean | null
+          product_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "product_images_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          badge: string | null
+          capacity: string | null
+          category: string | null
+          created_at: string
+          description: string | null
+          design_description: string | null
+          design_features: string[] | null
+          dimensions: string | null
+          features: string[] | null
+          id: string
+          image: string | null
+          material_specs: string[] | null
+          materials_description: string | null
+          name: string
+          overview_description: string | null
+          overview_key_benefits: string[] | null
+          performance_description: string | null
+          performance_metrics: string[] | null
+          power: string | null
+          price: string | null
+          temperature: string | null
+          updated_at: string
+          weight: string | null
+        }
+        Insert: {
+          badge?: string | null
+          capacity?: string | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          design_description?: string | null
+          design_features?: string[] | null
+          dimensions?: string | null
+          features?: string[] | null
+          id?: string
+          image?: string | null
+          material_specs?: string[] | null
+          materials_description?: string | null
+          name: string
+          overview_description?: string | null
+          overview_key_benefits?: string[] | null
+          performance_description?: string | null
+          performance_metrics?: string[] | null
+          power?: string | null
+          price?: string | null
+          temperature?: string | null
+          updated_at?: string
+          weight?: string | null
+        }
+        Update: {
+          badge?: string | null
+          capacity?: string | null
+          category?: string | null
+          created_at?: string
+          description?: string | null
+          design_description?: string | null
+          design_features?: string[] | null
+          dimensions?: string | null
+          features?: string[] | null
+          id?: string
+          image?: string | null
+          material_specs?: string[] | null
+          materials_description?: string | null
+          name?: string
+          overview_description?: string | null
+          overview_key_benefits?: string[] | null
+          performance_description?: string | null
+          performance_metrics?: string[] | null
+          power?: string | null
+          price?: string | null
+          temperature?: string | null
+          updated_at?: string
+          weight?: string | null
         }
         Relationships: []
       }
